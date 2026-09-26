@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 5 · Organizing and Recording Data</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #eef6ff 0%, #e0eefb 100%);
+            color: #1a2b3c;
+            line-height: 1.6;
+            padding: 1rem;
+            min-height: 100vh;
+        }
+
+        /* ============================================================ */
+        /*  WEBPAGE (LESSON) MODE                                       */
+        /* ============================================================ */
+        .webpage {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 20, 40, 0.35);
+            padding: 2rem 2.5rem 3rem;
+            border: 1px solid #d9e6f2;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2eefb;
+        }
+
+        .back-home {
+            background: #1e6f9f;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            transition: 0.2s;
+            border: 1px solid #4a94c4;
+        }
+
+        .back-home:hover {
+            background: #2d7fb8;
+            transform: translateY(-2px);
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .topic-pill {
+            background: #e2eefb;
+            color: #1e6f9f;
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.4rem 1.1rem;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+            border: 1px solid #b8d4ec;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #0f7a4d, #14995f);
+            color: #ffffff;
+            border: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 800;
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 6px 12px -6px #073a25;
+            border: 1px solid #2fae74;
+            letter-spacing: 0.3px;
+        }
+
+        .start-btn:hover {
+            background: linear-gradient(135deg, #14995f, #1bb574);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 16px -6px #073a25;
+        }
+
+        /* Webpage hero */
+        .web-hero {
+            text-align: center;
+            padding: 1.5rem 1rem 2rem;
+            border-bottom: 2px dashed #d9e6f2;
+            margin-bottom: 2rem;
+        }
+
+        .web-hero .big-icon {
+            font-size: 4.5rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .web-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #0a2e4b;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 0.6rem;
+        }
+
+        .web-hero .hero-sub {
+            font-size: 1.2rem;
+            color: #2c5779;
+            font-weight: 600;
+            margin-bottom: 1.3rem;
+        }
+
+        .web-hero .hero-tagline {
+            display: inline-block;
+            background: #e2f0fa;
+            border-left: 6px solid #1e6f9f;
+            padding: 0.9rem 1.6rem;
+            border-radius: 0 1.2rem 1.2rem 0;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #06283d;
+            font-weight: 500;
+            margin-bottom: 1.3rem;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.3rem;
+        }
+
+        .hero-badge {
+            background: #ffffff;
+            padding: 0.7rem 1.4rem;
+            border-radius: 40px;
+            box-shadow: 0 6px 0 #b8d0e5;
+            color: #13415c;
+            border: 1px solid #b8d0e5;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .hero-badge span {
+            font-size: 1.3rem;
+            margin-right: 6px;
+        }
+
+        /* Webpage sections */
+        .web-section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 1.5rem;
+        }
+
+        .web-section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .web-section-header .step-tag {
+            background: #0f2e44;
+            color: #bfe0ff;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            padding: 0.3rem 0.9rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .web-section-header h2 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #0b2d45;
+            line-height: 1.2;
+        }
+
+        .web-section p {
+            font-size: 1.05rem;
+            color: #1f3d54;
+            margin-bottom: 1rem;
+        }
+
+        .web-section strong {
+            color: #0a3f60;
+        }
+
+        /* Info grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.4rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-grid.three {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .info-box {
+            border-radius: 1.6rem;
+            padding: 1.4rem 1.5rem;
+            border: 2px solid #d9e6f2;
+            background: #fafdff;
+        }
+
+        .info-box.data-box {
+            border-color: #cfe2f5;
+            background: linear-gradient(145deg, #f4faff, #eaf4fe);
+        }
+
+        .info-box.info-box2 {
+            border-color: #d0f0e0;
+            background: linear-gradient(145deg, #f3fdf8, #e6faf1);
+        }
+
+        .info-box.sheet-box {
+            border-color: #e8d5a8;
+            background: linear-gradient(145deg, #fffdf5, #fef8e6);
+        }
+
+        .info-box h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #0b2d45;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-box .icon-lg {
+            font-size: 1.7rem;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.6rem;
+        }
+
+        .info-box li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .info-box li::before {
+            content: "●";
+            color: #1e6f9f;
+            font-size: 0.7rem;
+            margin-top: 0.45rem;
+            flex-shrink: 0;
+        }
+
+        .info-box.info-box2 li::before {
+            color: #0f7a4d;
+        }
+
+        .info-box.sheet-box li::before {
+            color: #b07a1e;
+        }
+
+        /* Recording tool cards */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.4rem;
+            margin: 1.5rem 0;
+        }
+
+        .tool-card {
+            background: linear-gradient(145deg, #ffffff, #f5faff);
+            border-radius: 1.8rem;
+            padding: 1.6rem 1.4rem 1.5rem;
+            border: 2px solid #cfe2f5;
+            box-shadow: 0 12px 25px -15px #1a4a6e80;
+            transition: 0.2s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 30px -15px #1a4a6e90;
+            border-color: #7fb3d8;
+        }
+
+        .tool-card .tool-icon {
+            font-size: 2.8rem;
+            line-height: 1;
+            margin-bottom: 0.6rem;
+        }
+
+        .tool-card h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #0b2d45;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-card p {
+            font-size: 0.95rem;
+            color: #33566f;
+            margin-bottom: 0.7rem;
+        }
+
+        .tool-card .tool-tip {
+            background: #eaf4fe;
+            border-radius: 1rem;
+            padding: 0.7rem 1rem;
+            font-size: 0.85rem;
+            color: #13415c;
+            border-left: 4px solid #1e6f9f;
+        }
+
+        .tool-card .tool-tip strong {
+            color: #0a3f60;
+        }
+
+        /* Tally example */
+        .tally-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 12px 25px -15px #1a4a6e80;
+        }
+
+        .tally-table th {
+            background: #0f2e44;
+            color: #ffffff;
+            padding: 1rem 1.1rem;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .tally-table td {
+            padding: 1rem 1.1rem;
+            border-bottom: 1px solid #d9e6f2;
+            background: #ffffff;
+            font-size: 1rem;
+            vertical-align: middle;
+        }
+
+        .tally-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tally-table tr:hover td {
+            background: #f6fafe;
+        }
+
+        .tally-table .fruit-cell {
+            font-weight: 800;
+            color: #0b2d45;
+        }
+
+        .tally-marks {
+            font-family: 'Courier New', monospace;
+            font-size: 1.15rem;
+            letter-spacing: 3px;
+            color: #1e6f9f;
+            font-weight: 700;
+        }
+
+        .freq-cell {
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: #0f7a4d;
+            text-align: center;
+        }
+
+        /* Spreadsheet illustration */
+        .spreadsheet {
+            margin: 1.5rem 0;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 12px 25px -15px #1a4a6e80;
+            border: 2px solid #cfe2f5;
+            background: #ffffff;
+        }
+
+        .sheet-bar {
+            background: #1e6f9f;
+            color: #ffffff;
+            padding: 0.7rem 1.2rem;
+            font-weight: 800;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            letter-spacing: 0.3px;
+        }
+
+        .sheet-bar .sheet-dots {
+            display: flex;
+            gap: 5px;
+            margin-right: 0.4rem;
+        }
+
+        .sheet-bar .sheet-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .sheet-body {
+            display: grid;
+            grid-template-columns: 40px 1fr 1fr 1fr;
+            font-size: 0.95rem;
+        }
+
+        .sheet-cell {
+            padding: 0.7rem 0.9rem;
+            border-right: 1px solid #e2eefb;
+            border-bottom: 1px solid #e2eefb;
+            background: #ffffff;
+            color: #1f3d54;
+        }
+
+        .sheet-cell.header {
+            background: #f4faff;
+            font-weight: 800;
+            color: #0b2d45;
+        }
+
+        .sheet-cell.row-label {
+            background: #f4faff;
+            font-weight: 700;
+            color: #13415c;
+            text-align: center;
+        }
+
+        .sheet-cell.formula {
+            background: #fff8e6;
+            color: #7a5a10;
+            font-weight: 800;
+            font-family: 'Courier New', monospace;
+        }
+
+        .sheet-cell.total {
+            background: #e6faf1;
+            color: #0b5e3c;
+            font-weight: 800;
+        }
+
+        /* Formula cards */
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .formula-card {
+            background: linear-gradient(145deg, #fff8e6, #fef3d6);
+            border-radius: 1.6rem;
+            padding: 1.4rem 1.3rem;
+            border: 2px solid #f0d89c;
+            box-shadow: 0 10px 20px -15px #8a5a10;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .formula-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 25px -15px #8a5a10;
+        }
+
+        .formula-card .formula-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .formula-card h4 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #7a5a10;
+            margin-bottom: 0.4rem;
+        }
+
+        .formula-card .formula-code {
+            background: #0f2e44;
+            color: #bfe0ff;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            padding: 0.6rem 0.8rem;
+            border-radius: 0.8rem;
+            margin: 0.6rem 0;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .formula-card .formula-meaning {
+            font-size: 0.85rem;
+            color: #5c4408;
+            font-weight: 600;
+        }
+
+        /* Key points */
+        .key-points {
+            background: linear-gradient(135deg, #0f2e44, #14425e);
+            color: #f0f9ff;
+            border-radius: 1.8rem;
+            padding: 1.6rem 2rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 15px 25px -12px #092c42;
+        }
+
+        .key-points h3 {
+            color: #bfe0ff;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .key-points ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .key-points li {
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            font-size: 1.02rem;
+        }
+
+        .key-points li::before {
+            content: "✔";
+            color: #5fd68a;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        /* Discussion */
+        .discussion-box {
+            background: #f4faff;
+            border-radius: 1.6rem;
+            padding: 1.5rem 1.8rem;
+            border-left: 8px solid #1e6f9f;
+            margin: 1.5rem 0;
+        }
+
+        .discussion-box h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #0a3f60;
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .discussion-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .discussion-box li {
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 1rem;
+            color: #1f3d54;
+        }
+
+        .discussion-box li::before {
+            content: "💬";
+            flex-shrink: 0;
+        }
+
+        /* Activity */
+        .activity-box {
+            background: linear-gradient(135deg, #fff8e6, #fef3d6);
+            border-radius: 1.6rem;
+            padding: 1.5rem 1.8rem;
+            border: 2px solid #f0d89c;
+            margin: 1.5rem 0;
+        }
+
+        .activity-box h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #7a5a10;
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .activity-box ol {
+            padding-left: 1.4rem;
+            color: #5c4408;
+        }
+
+        .activity-box ol li {
+            margin-bottom: 0.6rem;
+            font-size: 1rem;
+        }
+
+        /* Outcome banner */
+        .outcome-banner {
+            background: linear-gradient(135deg, #d9f0e4, #c2ebd6);
+            border-radius: 1.6rem;
+            padding: 1.3rem 1.8rem;
+            border: 2px solid #6cb99c;
+            margin: 1.8rem 0 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            font-weight: 700;
+            color: #0b5e3c;
+            font-size: 1.05rem;
+        }
+
+        .outcome-banner .outcome-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        /* ============================================================ */
+        /*  TEACHER INSTRUCTIONS SECTION (SIMPLE)                       */
+        /* ============================================================ */
+        .teacher-section {
+            margin-top: 3rem;
+            border-radius: 1.6rem;
+            overflow: hidden;
+            border: 3px dashed #c48a2c;
+            background: linear-gradient(145deg, #fffaf0, #fff4e0);
+            box-shadow: 0 12px 25px -15px #8a5a10;
+        }
+
+        .teacher-header {
+            background: linear-gradient(135deg, #8a5a10, #b07a1e);
+            color: #ffffff;
+            padding: 1rem 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+
+        .teacher-header .teacher-icon {
+            font-size: 1.5rem;
+        }
+
+        .teacher-header h2 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+        }
+
+        .teacher-body {
+            padding: 1.4rem 1.6rem 1.6rem;
+        }
+
+        .teacher-note {
+            background: #fffdf5;
+            border: 2px dashed #e0b75c;
+            border-radius: 1rem;
+            padding: 1rem 1.2rem;
+            font-size: 0.98rem;
+            color: #4a3a12;
+            min-height: 90px;
+            line-height: 1.7;
+        }
+
+        .teacher-note[contenteditable="true"]:focus {
+            outline: 3px solid #f0c674;
+            background: #fffef9;
+        }
+
+        .edit-hint {
+            font-size: 0.78rem;
+            color: #a17f2e;
+            margin-top: 0.6rem;
+            display: block;
+            font-style: italic;
+            text-align: right;
+        }
+
+        /* Presentation CTA */
+        .present-cta {
+            text-align: center;
+            background: linear-gradient(135deg, #0f2e44, #1a4f72);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-top: 2.5rem;
+            color: #f0f9ff;
+        }
+
+        .present-cta h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
+            color: #bfe0ff;
+        }
+
+        .present-cta p {
+            color: #d4ecff;
+            margin-bottom: 1.3rem;
+            font-size: 1rem;
+        }
+
+        .present-cta .start-btn {
+            font-size: 1.05rem;
+            padding: 0.85rem 2rem;
+        }
+
+        /* ============================================================ */
+        /*  PRESENTATION MODE                                          */
+        /* ============================================================ */
+        body.presenting {
+            background: #0a1e2e;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body.presenting .webpage {
+            display: none !important;
+        }
+
+        .presentation {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(145deg, #eef6ff 0%, #e0eefb 100%);
+            padding: 1.5rem;
+            overflow-y: auto;
+            z-index: 9999;
+        }
+
+        body.presenting .presentation {
+            display: block;
+        }
+
+        .presentation-inner {
+            max-width: 1150px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 20, 40, 0.4);
+            padding: 2rem 2.5rem 2.5rem;
+            border: 1px solid #d9e6f2;
+            position: relative;
+            min-height: calc(100vh - 3rem);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .exit-btn {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: #ffe6e6;
+            color: #b32d2d;
+            border: 1px solid #f5b8b8;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.5rem 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+            z-index: 10;
+        }
+
+        .exit-btn:hover {
+            background: #b32d2d;
+            color: #fff;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.4s ease;
+            flex: 1;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .slide-header .slide-num {
+            display: inline-block;
+            background: #0f2e44;
+            color: #bfe0ff;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .slide-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0b2d45;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .slide-header h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0b2d45;
+            line-height: 1.25;
+        }
+
+        .title-divider {
+            width: 90px;
+            height: 5px;
+            background: linear-gradient(90deg, #1e6f9f, #5fb3e0);
+            border-radius: 10px;
+            margin: 1rem auto 0;
+        }
+
+        .slide-body {
+            font-size: 1.08rem;
+            color: #1f3d54;
+        }
+
+        .slide-body p {
+            margin-bottom: 1rem;
+        }
+
+        .slide-body strong {
+            color: #0a3f60;
+        }
+
+        .hero-slide {
+            text-align: center;
+            padding: 1.5rem 1rem 2rem;
+        }
+
+        .hero-slide .big-icon {
+            font-size: 5rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-slide h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #0a2e4b;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-slide .hero-sub {
+            font-size: 1.35rem;
+            color: #2c5779;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-slide .hero-tagline {
+            display: inline-block;
+            background: #e2f0fa;
+            border-left: 6px solid #1e6f9f;
+            padding: 0.9rem 1.6rem;
+            border-radius: 0 1.2rem 1.2rem 0;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #06283d;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .slide-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #e2eefb;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #1e6f9f, #2d7fb8);
+            color: #ffffff;
+            border: none;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 0.7rem 1.6rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 6px 12px -6px #0a3a58;
+            border: 1px solid #4a94c4;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, #2d7fb8, #3a8bb9);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 16px -6px #0a3a58;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .nav-btn.secondary {
+            background: #eaf3fb;
+            color: #1e6f9f;
+            border: 1px solid #b8d4ec;
+            box-shadow: none;
+        }
+
+        .nav-btn.secondary:hover:not(:disabled) {
+            background: #1e6f9f;
+            color: #fff;
+        }
+
+        .slide-counter {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #1e6f9f;
+            background: #eaf3fb;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            border: 1px solid #b8d4ec;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2eefb;
+            border-radius: 10px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #1e6f9f, #5fb3e0);
+            border-radius: 10px;
+            transition: width 0.35s ease;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            .webpage {
+                padding: 1.4rem 1.2rem 2rem;
+            }
+            .web-hero h1 {
+                font-size: 2rem;
+            }
+            .web-section-header h2 {
+                font-size: 1.4rem;
+            }
+            .info-grid,
+            .info-grid.three,
+            .tool-grid,
+            .formula-grid {
+                grid-template-columns: 1fr;
+            }
+            .presentation-inner {
+                padding: 1.4rem 1.2rem 1.8rem;
+            }
+            .hero-slide h1 {
+                font-size: 2.2rem;
+            }
+            .slide-header h1,
+            .slide-header h2 {
+                font-size: 1.5rem;
+            }
+            .nav-btn {
+                padding: 0.6rem 1.1rem;
+                font-size: 0.85rem;
+            }
+            .exit-btn {
+                position: static;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
+            .sheet-body {
+                grid-template-columns: 30px 1fr 1fr 1fr;
+                font-size: 0.82rem;
+            }
+            .sheet-cell {
+                padding: 0.5rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!--  WEBPAGE (LESSON) VIEW                                       -->
+    <!-- ============================================================ -->
+    <div class="webpage" id="webpageView">
+
+        <!-- Top bar -->
+        <div class="top-bar">
+            <a href="index.html" class="back-home">← Back to Main Page</a>
+            <div class="top-actions">
+                <span class="topic-pill">TOPIC 5 · DATA LITERACY</span>
+                <button class="start-btn" onclick="startPresentation()">▶ Start Presentation</button>
+            </div>
+        </div>
+
+        <!-- Hero -->
+        <div class="web-hero">
+            <div class="big-icon">📊🗂️📋</div>
+            <h1>Organizing and<br>Recording Data</h1>
+            <p class="hero-sub">Grade 7 · Data Detectives Unit</p>
+            <div class="hero-tagline">
+                💬 “Messy data hides the story. Organised data reveals it.”
+            </div>
+            <div class="hero-badges">
+                <div class="hero-badge"><span>📋</span> Tables</div>
+                <div class="hero-badge"><span>✏️</span> Tally Charts</div>
+                <div class="hero-badge"><span>🔢</span> Frequency</div>
+                <div class="hero-badge"><span>💻</span> Spreadsheets</div>
+            </div>
+        </div>
+
+        <!-- SECTION 1 · WHY WE ORGANIZE DATA -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Part 1</span>
+                <h2>Why Do We Organize Data?</h2>
+            </div>
+            <p style="font-size:1.15rem;">
+                After collecting raw data, it is often <strong>messy and confusing</strong>. Organising data helps us <strong>see patterns</strong>, <strong>find answers</strong>, and <strong>avoid mistakes</strong>.
+            </p>
+            <div class="info-grid">
+                <div class="info-box data-box">
+                    <h3><span class="icon-lg">🔍</span> Makes It Easier to Understand</h3>
+                    <ul>
+                        <li>Patterns become visible.</li>
+                        <li>Comparisons become simple.</li>
+                        <li>Trends jump out at you.</li>
+                    </ul>
+                </div>
+                <div class="info-box data-box">
+                    <h3><span class="icon-lg">✅</span> Makes It Easier to Check</h3>
+                    <ul>
+                        <li>You can spot missing values.</li>
+                        <li>You can check for errors.</li>
+                        <li>You can count totals quickly.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h3>💡 Key Idea</h3>
+                <ul>
+                    <li>Raw data is like a <strong>pile of puzzle pieces</strong> — organising is putting them together.</li>
+                    <li>Organised data is <strong>ready to process</strong> into information.</li>
+                    <li>Without organisation, your data has no meaning.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 2 · TOOLS FOR RECORDING -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Part 2</span>
+                <h2>Tools for Recording Data</h2>
+            </div>
+            <p style="font-size:1.1rem;">
+                There are three main tools we use to record data by hand. Each one is useful in different situations.
+            </p>
+
+            <div class="tool-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">📋</div>
+                    <h3>Tables</h3>
+                    <p>Rows and columns that keep data neat and aligned.</p>
+                    <div class="tool-tip">
+                        <strong>Best for:</strong> Recording data that has labels and values — like names, scores, or categories.
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">✏️</div>
+                    <h3>Tally Charts</h3>
+                    <p>Counting with marks. Every 5th mark crosses the group.</p>
+                    <div class="tool-tip">
+                        <strong>Best for:</strong> Quickly counting how many times something happens as you observe it.
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">🔢</div>
+                    <h3>Frequency Tables</h3>
+                    <p>Show how often something occurs using numbers.</p>
+                    <div class="tool-tip">
+                        <strong>Best for:</strong> Summarising tally counts into clear numbers.
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h3>💡 Key Idea</h3>
+                <ul>
+                    <li><strong>Tables</strong> organise, <strong>tally charts</strong> count, and <strong>frequency tables</strong> summarise.</li>
+                    <li>They often work together — you can tally first, then write the frequency.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 3 · THE FRUIT EXAMPLE -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Part 3</span>
+                <h2>Example: Tally &amp; Frequency Table</h2>
+            </div>
+            <p style="font-size:1.1rem;">
+                Imagine you surveyed your class about their favourite fruit. Here is what the recorded data looks like in a <strong>tally and frequency table</strong>.
+            </p>
+
+            <table class="tally-table">
+                <thead>
+                    <tr>
+                        <th>🍎 Fruit</th>
+                        <th>✏️ Tally</th>
+                        <th style="text-align:center;">🔢 Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fruit-cell">Apple</td>
+                        <td class="tally-marks">////</td>
+                        <td class="freq-cell">4</td>
+                    </tr>
+                    <tr>
+                        <td class="fruit-cell">Banana</td>
+                        <td class="tally-marks">//// //</td>
+                        <td class="freq-cell">7</td>
+                    </tr>
+                    <tr>
+                        <td class="fruit-cell">Orange</td>
+                        <td class="tally-marks">///</td>
+                        <td class="freq-cell">3</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-grid">
+                <div class="info-box info-box2">
+                    <h3><span class="icon-lg">✏️</span> How to Read the Tally</h3>
+                    <ul>
+                        <li>Every group of <strong>5 marks</strong> uses a slash through 4 lines.</li>
+                        <li>4 lines + 1 slash = 5.</li>
+                        <li>Leftover single lines are counted individually.</li>
+                    </ul>
+                </div>
+                <div class="info-box info-box2">
+                    <h3><span class="icon-lg">🔢</span> How to Read the Frequency</h3>
+                    <ul>
+                        <li>Frequency = the <strong>total count</strong> for that category.</li>
+                        <li>Apple: 4 · Banana: 7 · Orange: 3.</li>
+                        <li>Total collected = 4 + 7 + 3 = <strong>14 responses</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h3>💡 Key Idea</h3>
+                <ul>
+                    <li>Tally marks are the <strong>live count</strong> — you make them as you collect.</li>
+                    <li>Frequency is the <strong>final number</strong> — written after you finish counting.</li>
+                    <li>Together they make the data <strong>easy to read and compare</strong>.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 4 · SPREADSHEETS -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Part 4</span>
+                <h2>Using Spreadsheets</h2>
+            </div>
+            <p style="font-size:1.1rem;">
+                A <strong>spreadsheet</strong> is a digital tool for organising data — like a smart table that can also <strong>calculate</strong> for you. Popular options are <strong>Google Sheets</strong> and <strong>Microsoft Excel</strong>.
+            </p>
+
+            <div class="info-grid three">
+                <div class="info-box sheet-box">
+                    <h3><span class="icon-lg">💻</span> Google Sheets</h3>
+                    <ul>
+                        <li>Free online tool.</li>
+                        <li>Works in any browser.</li>
+                        <li>Great for sharing with classmates.</li>
+                    </ul>
+                </div>
+                <div class="info-box sheet-box">
+                    <h3><span class="icon-lg">📗</span> Microsoft Excel</h3>
+                    <ul>
+                        <li>Powerful desktop tool.</li>
+                        <li>Lots of advanced features.</li>
+                        <li>Common in workplaces.</li>
+                    </ul>
+                </div>
+                <div class="info-box sheet-box">
+                    <h3><span class="icon-lg">🌟</span> Why Use Them?</h3>
+                    <ul>
+                        <li>Auto-calculate totals.</li>
+                        <li>Sort and filter easily.</li>
+                        <li>Make charts instantly.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="spreadsheet">
+                <div class="sheet-bar">
+                    <div class="sheet-dots"><span></span><span></span><span></span></div>
+                    📄 Favourite Fruit Survey · Google Sheets
+                </div>
+                <div class="sheet-body">
+                    <div class="sheet-cell row-label"></div>
+                    <div class="sheet-cell header">A</div>
+                    <div class="sheet-cell header">B</div>
+                    <div class="sheet-cell header">C</div>
+
+                    <div class="sheet-cell row-label">1</div>
+                    <div class="sheet-cell header">Fruit</div>
+                    <div class="sheet-cell header">Tally</div>
+                    <div class="sheet-cell header">Frequency</div>
+
+                    <div class="sheet-cell row-label">2</div>
+                    <div class="sheet-cell">Apple</div>
+                    <div class="sheet-cell">////</div>
+                    <div class="sheet-cell">4</div>
+
+                    <div class="sheet-cell row-label">3</div>
+                    <div class="sheet-cell">Banana</div>
+                    <div class="sheet-cell">//// //</div>
+                    <div class="sheet-cell">7</div>
+
+                    <div class="sheet-cell row-label">4</div>
+                    <div class="sheet-cell">Orange</div>
+                    <div class="sheet-cell">///</div>
+                    <div class="sheet-cell">3</div>
+
+                    <div class="sheet-cell row-label">5</div>
+                    <div class="sheet-cell header">Total</div>
+                    <div class="sheet-cell"></div>
+                    <div class="sheet-cell formula">=SUM(C2:C4)</div>
+
+                    <div class="sheet-cell row-label">6</div>
+                    <div class="sheet-cell header">Average</div>
+                    <div class="sheet-cell"></div>
+                    <div class="sheet-cell formula">=AVERAGE(C2:C4)</div>
+
+                    <div class="sheet-cell row-label">7</div>
+                    <div class="sheet-cell header">Count</div>
+                    <div class="sheet-cell"></div>
+                    <div class="sheet-cell formula">=COUNT(C2:C4)</div>
+
+                    <div class="sheet-cell row-label">8</div>
+                    <div class="sheet-cell header">Result</div>
+                    <div class="sheet-cell"></div>
+                    <div class="sheet-cell total">14 | 4.67 | 3</div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h3>💡 Key Idea</h3>
+                <ul>
+                    <li>Spreadsheets do the maths for you — so you can focus on meaning.</li>
+                    <li>Every formula starts with an <strong>=</strong> sign.</li>
+                    <li>You can edit values and the totals update automatically.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 5 · BASIC SPREADSHEET SKILLS -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Part 5</span>
+                <h2>Basic Spreadsheet Skills</h2>
+            </div>
+            <p style="font-size:1.1rem;">
+                Three simple skills will get you started. Once you know these, you can organise almost any data.
+            </p>
+
+            <div class="info-grid">
+                <div class="info-box sheet-box">
+                    <h3><span class="icon-lg">⌨️</span> 1. Entering Data</h3>
+                    <ul>
+                        <li>Click a cell to select it.</li>
+                        <li>Type your value and press Enter.</li>
+                        <li>Each cell holds one piece of data.</li>
+                    </ul>
+                </div>
+                <div class="info-box sheet-box">
+                    <h3><span class="icon-lg">🏷️</span> 2. Naming Columns</h3>
+                    <ul>
+                        <li>Give each column a clear heading.</li>
+                        <li>Use row 1 for the headers.</li>
+                        <li>Example: Fruit, Tally, Frequency.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="formula-grid">
+                <div class="formula-card">
+                    <div class="formula-icon">➕</div>
+                    <h4>SUM</h4>
+                    <div class="formula-code">=SUM(C2:C10)</div>
+                    <div class="formula-meaning">Adds up all numbers in the range.</div>
+                </div>
+                <div class="formula-card">
+                    <div class="formula-icon">📊</div>
+                    <h4>AVERAGE</h4>
+                    <div class="formula-code">=AVERAGE(C2:C10)</div>
+                    <div class="formula-meaning">Finds the mean of the numbers.</div>
+                </div>
+                <div class="formula-card">
+                    <div class="formula-icon">🔢</div>
+                    <h4>COUNT</h4>
+                    <div class="formula-code">=COUNT(C2:C10)</div>
+                    <div class="formula-meaning">Counts how many numbers are in the range.</div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h3>💡 Key Idea</h3>
+                <ul>
+                    <li>Formulas save you time and reduce mistakes.</li>
+                    <li>Use <strong>SUM</strong> for totals, <strong>AVERAGE</strong> for means, and <strong>COUNT</strong> for how many.</li>
+                    <li>Ranges like <strong>C2:C10</strong> mean "from cell C2 down to cell C10".</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 6 · ACTIVITY -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Activity</span>
+                <h2>Let's Practise! 🎯</h2>
+            </div>
+
+            <div class="activity-box">
+                <h3>📝 Activity 1: Build a Tally &amp; Frequency Table</h3>
+                <ol>
+                    <li>Ask 10 classmates what their favourite drink is.</li>
+                    <li>Record each answer with a tally mark.</li>
+                    <li>Write the frequency for each drink.</li>
+                    <li>Total all the frequencies — do they add up to 10?</li>
+                </ol>
+            </div>
+
+            <div class="activity-box">
+                <h3>💻 Activity 2: Make It Digital</h3>
+                <ol>
+                    <li>Open <strong>Google Sheets</strong> or <strong>Microsoft Excel</strong>.</li>
+                    <li>Create three columns: <strong>Item</strong>, <strong>Tally</strong>, <strong>Frequency</strong>.</li>
+                    <li>Enter your data from Activity 1.</li>
+                    <li>Use <strong>=SUM()</strong> to total the Frequency column.</li>
+                    <li>Use <strong>=AVERAGE()</strong> to find the average frequency.</li>
+                </ol>
+            </div>
+
+            <div class="activity-box">
+                <h3>✍️ Activity 3: Fix the Messy Data</h3>
+                <ol>
+                    <li>Here is messy data: <em>“apple, 5; banana, banana, banana, orange; apple; banana; orange; orange, apple”</em></li>
+                    <li>Rewrite it as a proper frequency table with tally marks.</li>
+                    <li>Check: Does your total match the original list?</li>
+                </ol>
+            </div>
+
+            <div class="discussion-box">
+                <h3>💬 Class Discussion</h3>
+                <ul>
+                    <li>Why is it important to record data while you collect it, not later?</li>
+                    <li>What could go wrong if your tally chart has errors?</li>
+                    <li>How does a spreadsheet make processing data easier?</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 7 · SUMMARY -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Summary</span>
+                <h2>What We Learned Today</h2>
+            </div>
+            <div class="key-points">
+                <h3>📌 Key Takeaways</h3>
+                <ul>
+                    <li>Organising data makes it <strong>easier to understand and check</strong>.</li>
+                    <li>Three main tools: <strong>tables, tally charts, and frequency tables</strong>.</li>
+                    <li>Spreadsheets like <strong>Google Sheets</strong> and <strong>Excel</strong> record and process data automatically.</li>
+                    <li>Basic skills: <strong>entering data, naming columns, using formulas</strong>.</li>
+                    <li>Key formulas: <strong>=SUM(), =AVERAGE(), =COUNT()</strong>.</li>
+                </ul>
+            </div>
+            <div class="outcome-banner">
+                <span class="outcome-icon">🎓</span>
+                <span><strong>Student Outcome:</strong> You can now organise data in tables and enter it into a spreadsheet using basic formulas.</span>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TEACHER INSTRUCTIONS SECTION (SIMPLE)                        -->
+        <!-- ============================================================ -->
+        <section class="teacher-section" id="teacher-instructions">
+            <div class="teacher-header">
+                <span class="teacher-icon">👩‍🏫</span>
+                <h2>Teacher Instructions</h2>
+            </div>
+            <div class="teacher-body">
+                <div class="teacher-note" contenteditable="true">
+                    Take the ZipGrade quiz.<br>
+                    Submit the work on time.
+                </div>
+                <span class="edit-hint">✏️ Click to edit. Changes are temporary (refresh will reset).</span>
+            </div>
+        </section>
+
+        <!-- CTA to start presentation -->
+        <div class="present-cta">
+            <h3>🎬 Ready to present?</h3>
+            <p>Switch to full-screen presentation mode with slides and keyboard navigation.</p>
+            <button class="start-btn" onclick="startPresentation()">▶ Start Presentation</button>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!--  PRESENTATION MODE                                           -->
+    <!-- ============================================================ -->
+    <div class="presentation" id="presentationView">
+        <div class="presentation-inner">
+
+            <button class="exit-btn" onclick="exitPresentation()">✕ Exit Presentation</button>
+
+            <!-- SLIDE 1 · TITLE -->
+            <section class="slide active" id="slide-1">
+                <div class="hero-slide">
+                    <div class="big-icon">📊🗂️📋</div>
+                    <h1>Organizing and<br>Recording Data</h1>
+                    <p class="hero-sub">Grade 7 · Data Detectives Unit</p>
+                    <div class="hero-tagline">
+                        💬 “Messy data hides the story. Organised data reveals it.”
+                    </div>
+                    <div class="hero-badges">
+                        <div class="hero-badge"><span>📋</span> Tables</div>
+                        <div class="hero-badge"><span>✏️</span> Tally Charts</div>
+                        <div class="hero-badge"><span>🔢</span> Frequency</div>
+                        <div class="hero-badge"><span>💻</span> Spreadsheets</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 2 · WHY ORGANIZE -->
+            <section class="slide" id="slide-2">
+                <div class="slide-header">
+                    <span class="slide-num">PART 1</span>
+                    <h2>Why Do We Organize Data?</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <p style="font-size:1.15rem; text-align:center; margin-bottom:1.5rem;">
+                        Raw data is messy. Organising it helps us <strong>see patterns</strong> and <strong>find answers</strong>.
+                    </p>
+                    <div class="info-grid">
+                        <div class="info-box data-box">
+                            <h3><span class="icon-lg">🔍</span> Easier to Understand</h3>
+                            <ul>
+                                <li>Patterns become visible.</li>
+                                <li>Comparisons become simple.</li>
+                                <li>Trends jump out at you.</li>
+                            </ul>
+                        </div>
+                        <div class="info-box data-box">
+                            <h3><span class="icon-lg">✅</span> Easier to Check</h3>
+                            <ul>
+                                <li>Spot missing values.</li>
+                                <li>Check for errors.</li>
+                                <li>Count totals quickly.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 3 · TOOLS -->
+            <section class="slide" id="slide-3">
+                <div class="slide-header">
+                    <span class="slide-num">PART 2</span>
+                    <h2>Tools for Recording Data</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="tool-grid">
+                        <div class="tool-card">
+                            <div class="tool-icon">📋</div>
+                            <h3>Tables</h3>
+                            <p>Rows and columns.</p>
+                            <div class="tool-tip"><strong>Best for:</strong> Neat, labelled data.</div>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">✏️</div>
+                            <h3>Tally Charts</h3>
+                            <p>Counting with marks.</p>
+                            <div class="tool-tip"><strong>Best for:</strong> Quick counts while observing.</div>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">🔢</div>
+                            <h3>Frequency Tables</h3>
+                            <p>Show how often things happen.</p>
+                            <div class="tool-tip"><strong>Best for:</strong> Summarising tallies.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 4 · FRUIT EXAMPLE -->
+            <section class="slide" id="slide-4">
+                <div class="slide-header">
+                    <span class="slide-num">PART 3</span>
+                    <h2>Example: Tally &amp; Frequency Table</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <table class="tally-table">
+                        <thead>
+                            <tr>
+                                <th>🍎 Fruit</th>
+                                <th>✏️ Tally</th>
+                                <th style="text-align:center;">🔢 Frequency</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fruit-cell">Apple</td>
+                                <td class="tally-marks">////</td>
+                                <td class="freq-cell">4</td>
+                            </tr>
+                            <tr>
+                                <td class="fruit-cell">Banana</td>
+                                <td class="tally-marks">//// //</td>
+                                <td class="freq-cell">7</td>
+                            </tr>
+                            <tr>
+                                <td class="fruit-cell">Orange</td>
+                                <td class="tally-marks">///</td>
+                                <td class="freq-cell">3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="key-points" style="margin-top:1.5rem;">
+                        <h3>💡 Key Idea</h3>
+                        <ul>
+                            <li>Tally = live count as you collect.</li>
+                            <li>Frequency = final number after counting.</li>
+                            <li>Total responses = 4 + 7 + 3 = 14.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 5 · SPREADSHEETS -->
+            <section class="slide" id="slide-5">
+                <div class="slide-header">
+                    <span class="slide-num">PART 4</span>
+                    <h2>Using Spreadsheets</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <p style="font-size:1.1rem; text-align:center; margin-bottom:1.2rem;">
+                        Digital tools like <strong>Google Sheets</strong> and <strong>Excel</strong> record and calculate automatically.
+                    </p>
+                    <div class="info-grid three">
+                        <div class="info-box sheet-box">
+                            <h3><span class="icon-lg">💻</span> Google Sheets</h3>
+                            <ul>
+                                <li>Free online tool.</li>
+                                <li>Easy to share.</li>
+                            </ul>
+                        </div>
+                        <div class="info-box sheet-box">
+                            <h3><span class="icon-lg">📗</span> Excel</h3>
+                            <ul>
+                                <li>Powerful desktop app.</li>
+                                <li>Lots of features.</li>
+                            </ul>
+                        </div>
+                        <div class="info-box sheet-box">
+                            <h3><span class="icon-lg">🌟</span> Why Use?</h3>
+                            <ul>
+                                <li>Auto-calculate.</li>
+                                <li>Sort and chart easily.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="spreadsheet" style="margin-top:1.5rem;">
+                        <div class="sheet-bar">
+                            <div class="sheet-dots"><span></span><span></span><span></span></div>
+                            📄 Favourite Fruit Survey
+                        </div>
+                        <div class="sheet-body">
+                            <div class="sheet-cell row-label"></div>
+                            <div class="sheet-cell header">A</div>
+                            <div class="sheet-cell header">B</div>
+                            <div class="sheet-cell header">C</div>
+                            <div class="sheet-cell row-label">1</div>
+                            <div class="sheet-cell header">Fruit</div>
+                            <div class="sheet-cell header">Tally</div>
+                            <div class="sheet-cell header">Frequency</div>
+                            <div class="sheet-cell row-label">2</div>
+                            <div class="sheet-cell">Apple</div>
+                            <div class="sheet-cell">////</div>
+                            <div class="sheet-cell">4</div>
+                            <div class="sheet-cell row-label">3</div>
+                            <div class="sheet-cell">Banana</div>
+                            <div class="sheet-cell">//// //</div>
+                            <div class="sheet-cell">7</div>
+                            <div class="sheet-cell row-label">4</div>
+                            <div class="sheet-cell">Orange</div>
+                            <div class="sheet-cell">///</div>
+                            <div class="sheet-cell">3</div>
+                            <div class="sheet-cell row-label">5</div>
+                            <div class="sheet-cell header">Total</div>
+                            <div class="sheet-cell"></div>
+                            <div class="sheet-cell formula">=SUM(C2:C4)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 6 · BASIC SKILLS -->
+            <section class="slide" id="slide-6">
+                <div class="slide-header">
+                    <span class="slide-num">PART 5</span>
+                    <h2>Basic Spreadsheet Skills</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="info-grid">
+                        <div class="info-box sheet-box">
+                            <h3><span class="icon-lg">⌨️</span> Entering Data</h3>
+                            <ul>
+                                <li>Click a cell, type, press Enter.</li>
+                                <li>One value per cell.</li>
+                            </ul>
+                        </div>
+                        <div class="info-box sheet-box">
+                            <h3><span class="icon-lg">🏷️</span> Naming Columns</h3>
+                            <ul>
+                                <li>Use row 1 for headers.</li>
+                                <li>Example: Fruit, Tally, Frequency.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="formula-grid" style="margin-top:1.5rem;">
+                        <div class="formula-card">
+                            <div class="formula-icon">➕</div>
+                            <h4>SUM</h4>
+                            <div class="formula-code">=SUM(C2:C10)</div>
+                            <div class="formula-meaning">Adds up numbers.</div>
+                        </div>
+                        <div class="formula-card">
+                            <div class="formula-icon">📊</div>
+                            <h4>AVERAGE</h4>
+                            <div class="formula-code">=AVERAGE(C2:C10)</div>
+                            <div class="formula-meaning">Finds the mean.</div>
+                        </div>
+                        <div class="formula-card">
+                            <div class="formula-icon">🔢</div>
+                            <h4>COUNT</h4>
+                            <div class="formula-code">=COUNT(C2:C10)</div>
+                            <div class="formula-meaning">Counts numbers.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 7 · ACTIVITY -->
+            <section class="slide" id="slide-7">
+                <div class="slide-header">
+                    <span class="slide-num">ACTIVITY</span>
+                    <h2>Let's Practise! 🎯</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="activity-box">
+                        <h3>📝 Activity 1: Build a Table</h3>
+                        <ol>
+                            <li>Ask 10 classmates their favourite drink.</li>
+                            <li>Record each answer with a tally mark.</li>
+                            <li>Write the frequency for each.</li>
+                        </ol>
+                    </div>
+                    <div class="activity-box">
+                        <h3>💻 Activity 2: Make It Digital</h3>
+                        <ol>
+                            <li>Open Google Sheets or Excel.</li>
+                            <li>Create columns: Item, Tally, Frequency.</li>
+                            <li>Use <strong>=SUM()</strong> and <strong>=AVERAGE()</strong>.</li>
+                        </ol>
+                    </div>
+                    <div class="activity-box">
+                        <h3>✍️ Activity 3: Fix the Messy Data</h3>
+                        <ol>
+                            <li>Rewrite messy data as a proper table.</li>
+                            <li>Check your total matches.</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 8 · SUMMARY -->
+            <section class="slide" id="slide-8">
+                <div class="slide-header">
+                    <span class="slide-num">SUMMARY</span>
+                    <h2>What We Learned Today</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="key-points">
+                        <h3>📌 Key Takeaways</h3>
+                        <ul>
+                            <li>Organising data makes it easier to understand and check.</li>
+                            <li>Three tools: <strong>tables, tally charts, frequency tables</strong>.</li>
+                            <li>Spreadsheets record and calculate automatically.</li>
+                            <li>Key formulas: <strong>=SUM(), =AVERAGE(), =COUNT()</strong>.</li>
+                        </ul>
+                    </div>
+                    <div class="outcome-banner">
+                        <span class="outcome-icon">🎓</span>
+                        <span><strong>Student Outcome:</strong> You can now organise data in tables and enter it into a spreadsheet using basic formulas.</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NAV -->
+            <div class="slide-nav">
+                <button class="nav-btn secondary" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+                <span class="slide-counter" id="counter">Slide 1 / 8</span>
+                <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 12.5%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== PRESENTATION MODE =====
+        const slides = document.querySelectorAll('.slide');
+        const counter = document.getElementById('counter');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressFill = document.getElementById('progressFill');
+        let current = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            counter.textContent = `Slide ${index + 1} / ${slides.length}`;
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === slides.length - 1;
+            progressFill.style.width = ((index + 1) / slides.length * 100) + '%';
+            document.querySelector('.presentation').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function changeSlide(direction) {
+            const newIndex = current + direction;
+            if (newIndex >= 0 && newIndex < slides.length) {
+                current = newIndex;
+                showSlide(current);
+            }
+        }
+
+        function startPresentation() {
+            document.body.classList.add('presenting');
+            current = 0;
+            showSlide(0);
+            const el = document.documentElement;
+            if (el.requestFullscreen) {
+                el.requestFullscreen().catch(() => {});
+            } else if (el.webkitRequestFullscreen) {
+                el.webkitRequestFullscreen();
+            }
+        }
+
+        function exitPresentation() {
+            document.body.classList.remove('presenting');
+            if (document.fullscreenElement) {
+                document.exitFullscreen().catch(() => {});
+            } else if (document.webkitFullscreenElement) {
+                document.webkitExitFullscreen();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (!document.body.classList.contains('presenting')) return;
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                changeSlide(1);
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                changeSlide(-1);
+            }
+            if (e.key === 'Escape') {
+                exitPresentation();
+            }
+        });
+
+        showSlide(0);
+    </script>
+</body>
+</html>

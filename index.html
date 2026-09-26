@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Detectives · Grade 7 Data Literacy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #f0f7ff 0%, #e6f0fa 100%);
+            color: #1a2b3c;
+            line-height: 1.5;
+            padding: 1rem;
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(2px);
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 20, 40, 0.3);
+            padding: 2rem 2rem 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        /* Header & unit title */
+        .hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #0b3b5c;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: #0a2e4b;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        .subhead {
+            font-size: 1.3rem;
+            color: #2c5779;
+            font-weight: 500;
+            max-width: 700px;
+            margin: 0.5rem auto 1rem;
+        }
+
+        .unit-title {
+            background: linear-gradient(135deg, #ffffff, #eef6ff);
+            display: inline-block;
+            padding: 0.8rem 2.2rem;
+            border-radius: 60px;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #1f4b6e;
+            border: 3px solid #a8c9e8;
+            box-shadow: 0 8px 0 #b0cbe0;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .data-cycle-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .cycle-step {
+            background: white;
+            padding: 0.5rem 1.4rem;
+            border-radius: 40px;
+            box-shadow: 0 4px 0 #b8d0e5;
+            color: #13415c;
+            border: 1px solid #b8d0e5;
+        }
+
+        .cycle-step span {
+            font-size: 1.3rem;
+            margin-right: 6px;
+        }
+
+        /* ===== TOPIC NAVIGATION MENU ===== */
+        .topic-nav {
+            background: #0f2e44;
+            border-radius: 2rem;
+            padding: 1.3rem 1.5rem;
+            margin: 0 0 2.5rem;
+            box-shadow: 0 12px 22px -12px #062338;
+        }
+
+        .topic-nav h3 {
+            color: #bfe0ff;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.9rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            background: #1e6f9f;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: 0.2s;
+            border: 1px solid #4a94c4;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            background: #3a8bb9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px -4px #001d33;
+        }
+
+        .nav-links a span {
+            font-weight: 800;
+            margin-right: 4px;
+            color: #d4ecff;
+        }
+
+        /* Introduction section */
+        .intro-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f2f9ff 100%);
+            border-radius: 2rem;
+            padding: 2rem 2.2rem;
+            margin: 0 0 3rem;
+            border: 2px solid #c5def5;
+            box-shadow: 0 12px 22px -12px #1a4a6e40;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-section::before {
+            content: "🔍";
+            position: absolute;
+            font-size: 9rem;
+            opacity: 0.06;
+            right: 10px;
+            bottom: -25px;
+            transform: rotate(-12deg);
+            pointer-events: none;
+        }
+
+        .intro-section h2 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: #0b2d45;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .intro-section h2 span {
+            font-size: 2rem;
+        }
+
+        .intro-section p {
+            font-size: 1.05rem;
+            color: #1f3d54;
+            margin-bottom: 1rem;
+            max-width: 900px;
+        }
+
+        .intro-section p strong {
+            color: #0a3f60;
+        }
+
+        .intro-highlight {
+            background: #e2f0fa;
+            border-left: 6px solid #1e6f9f;
+            padding: 1rem 1.4rem;
+            border-radius: 0 1.2rem 1.2rem 0;
+            margin: 1.2rem 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #06283d;
+            font-style: italic;
+        }
+
+        .intro-footer {
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: #13415c;
+            margin-top: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* topic grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.8rem;
+            margin: 0 0 1.5rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 2rem;
+            padding: 1.6rem 1.5rem 1.4rem;
+            box-shadow: 0 12px 22px -8px rgba(0, 30, 60, 0.12);
+            border: 1px solid #d9e6f2;
+            transition: transform 0.15s ease, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            border-top: 6px solid #1e6f9f;
+            scroll-margin-top: 1.5rem;
+        }
+
+        .card:target {
+            box-shadow: 0 0 0 4px #ffd966, 0 22px 30px -12px #0b3550;
+            transform: translateY(-4px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 22px 30px -12px #0b3550;
+            border-top-color: #0f4b6e;
+        }
+
+        .topic-number {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1e6f9f;
+            background: #e2eefb;
+            display: inline-block;
+            padding: 0.2rem 0.9rem;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+            margin-bottom: 0.9rem;
+            align-self: flex-start;
+        }
+
+        .card h2 {
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: #0b2d45;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            border-left: 5px solid #3a8bb9;
+            padding-left: 0.8rem;
+        }
+
+        .card p, .card ul {
+            font-size: 1rem;
+            color: #203e57;
+            margin-bottom: 0.8rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .card li::before {
+            content: "▹";
+            color: #1e6f9f;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .highlight-box {
+            background: #f4faff;
+            border-radius: 1.2rem;
+            padding: 1rem 1.2rem;
+            margin: 0.8rem 0;
+            border-left: 5px solid #2d7fb8;
+            font-size: 0.95rem;
+            color: #0f324a;
+        }
+
+        .mini-table {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: #e9f2fa;
+            border-radius: 1rem;
+            padding: 0.9rem;
+            margin: 0.7rem 0;
+            font-size: 0.95rem;
+        }
+
+        .mini-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed #adc8e0;
+            padding-bottom: 4px;
+        }
+
+        .mini-row:last-child {
+            border-bottom: none;
+        }
+
+        .badge-outcome {
+            background: #d9f0e4;
+            color: #0b5e3c;
+            border-radius: 30px;
+            padding: 0.3rem 1rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-top: 0.8rem;
+            align-self: flex-start;
+            border: 1px solid #6cb99c;
+        }
+
+        /* ===== CARD ACTION BUTTONS ===== */
+        .card-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1.2rem;
+            align-items: center;
+        }
+
+        .lesson-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #1e6f9f, #2d7fb8);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 700;
+            padding: 0.6rem 1.3rem;
+            border-radius: 30px;
+            transition: 0.2s;
+            box-shadow: 0 6px 12px -6px #0a3a58;
+            border: 1px solid #4a94c4;
+            line-height: 1.3;
+        }
+
+        .lesson-link:hover {
+            background: linear-gradient(135deg, #2d7fb8, #3a8bb9);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 16px -6px #0a3a58;
+        }
+
+        .back-top {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #1e6f9f;
+            text-decoration: none;
+            background: #eaf3fb;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            border: 1px solid #b8d4ec;
+            transition: 0.2s;
+        }
+
+        .back-top:hover {
+            background: #1e6f9f;
+            color: #ffffff;
+        }
+
+        /* special styling for full-width cards / summary */
+        .full-width {
+            grid-column: 1 / -1;
+            background: linear-gradient(120deg, #fff, #f0f9ff);
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0 0.5rem;
+            font-size: 0.95rem;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .summary-table th {
+            background: #1c5e85;
+            color: white;
+            padding: 12px 10px;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .summary-table td {
+            padding: 10px 10px;
+            border-bottom: 1px solid #c4daeb;
+            background: #ffffff;
+        }
+
+        .summary-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .summary-table tr:hover td {
+            background: #e3f0fc;
+        }
+
+        .summary-table a {
+            color: #1e6f9f;
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 1px dashed #1e6f9f;
+        }
+
+        .summary-table a:hover {
+            color: #0b3b5c;
+            border-bottom-style: solid;
+        }
+
+        .summary-table .lesson-mini {
+            font-size: 0.78rem;
+            background: #eaf3fb;
+            padding: 0.25rem 0.7rem;
+            border-radius: 20px;
+            border: 1px solid #b8d4ec;
+            white-space: nowrap;
+            text-decoration: none;
+            color: #1e6f9f;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .summary-table .lesson-mini:hover {
+            background: #1e6f9f;
+            color: #ffffff;
+        }
+
+        /* charts / example illustration */
+        .chart-example {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: center;
+            margin: 1.2rem 0;
+        }
+
+        .chart-item {
+            background: #fafeff;
+            border-radius: 1.2rem;
+            padding: 1rem 1rem 0.8rem;
+            flex: 1 1 180px;
+            border: 2px solid #c7def2;
+            box-shadow: 0 4px 10px #c0d9ef80;
+            text-align: center;
+        }
+
+        .bar-chart-simple {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 100px;
+            margin: 0.5rem 0;
+            padding: 0 5px;
+        }
+
+        .bar {
+            width: 35px;
+            background: #2d7fb8;
+            border-radius: 8px 8px 4px 4px;
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .bar span {
+            font-size: 0.7rem;
+            color: #001e33;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .bar-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #224d6e;
+        }
+
+        .pie-symbol {
+            font-size: 2.5rem;
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+
+        .caption {
+            font-size: 0.8rem;
+            color: #1c4970;
+            font-weight: 500;
+        }
+
+        .student-outcome {
+            background: #e2f0fa;
+            border-radius: 2rem;
+            padding: 1rem 1.8rem;
+            margin-top: 2rem;
+            font-weight: 500;
+            color: #033452;
+            border: 2px solid #b3d4ed;
+            font-size: 1.1rem;
+        }
+
+        .student-outcome strong {
+            color: #0a3f60;
+        }
+
+        /* footer */
+        .footer-note {
+            margin-top: 3.5rem;
+            text-align: center;
+            border-top: 2px solid #bdd6ec;
+            padding-top: 2rem;
+            color: #2d5f83;
+            font-weight: 500;
+        }
+
+        .footer-note a {
+            color: #1e6f9f;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .core-message {
+            background: #0f2e44;
+            color: #f0f9ff;
+            border-radius: 3rem;
+            padding: 1.6rem 2rem;
+            margin: 2rem 0 0.5rem;
+            font-size: 1.25rem;
+            text-align: center;
+            font-weight: 600;
+            line-height: 1.6;
+            letter-spacing: 0.2px;
+            box-shadow: 0 15px 20px -10px #092c42;
+        }
+
+        /* mobile */
+        @media (max-width: 650px) {
+            .page {
+                padding: 1.5rem 1rem;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+            .unit-title {
+                font-size: 1.3rem;
+                padding: 0.6rem 1.2rem;
+            }
+            .grid {
+                gap: 1.2rem;
+            }
+            .core-message {
+                font-size: 1rem;
+                padding: 1.2rem;
+            }
+            .intro-section {
+                padding: 1.4rem;
+            }
+            .intro-section h2 {
+                font-size: 1.5rem;
+            }
+            .nav-links a {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page" id="top">
+        <div class="hero">
+            <div class="badge">📊 INDICATOR 3 · DATA LITERACY</div>
+            <h1>Data Detectives</h1>
+            <div class="unit-title">Collect · Process · Evaluate · Present</div>
+            <p class="subhead">Grade 7 · From raw numbers to real stories</p>
+            <div class="data-cycle-bar">
+                <div class="cycle-step"><span>📥</span> Collect</div>
+                <div class="cycle-step"><span>⚙️</span> Process</div>
+                <div class="cycle-step"><span>🔍</span> Evaluate</div>
+                <div class="cycle-step"><span>📢</span> Present</div>
+            </div>
+        </div>
+
+        <!-- ===== TOPIC NAVIGATION MENU ===== -->
+        <nav class="topic-nav">
+            <h3>🔗 Jump to a Topic</h3>
+            <div class="nav-links">
+                <a href="#topic-1"><span>1</span>Data &amp; Information</a>
+                <a href="#topic-2"><span>2</span>Setting Objectives</a>
+                <a href="#topic-3"><span>3</span>Primary vs Secondary</a>
+                <a href="#topic-4"><span>4</span>Collecting Data</a>
+                <a href="#topic-5"><span>5</span>Organizing Data</a>
+                <a href="#topic-6"><span>6</span>Processing Data</a>
+                <a href="#topic-7"><span>7</span>Evaluating Data</a>
+                <a href="#topic-8"><span>8</span>Presenting Visually</a>
+                <a href="#topic-9"><span>9</span>Internet Services</a>
+                <a href="#topic-10"><span>10</span>Presenting Findings</a>
+                <a href="#topic-11"><span>11</span>Complete Project</a>
+                <a href="#summary-table"><span>📋</span>Summary</a>
+            </div>
+        </nav>
+
+        <!-- ===== INTRODUCTION SECTION ===== -->
+        <div class="intro-section">
+            <h2><span>🌟</span> Introduction: Become a Data Detective</h2>
+
+            <p>Every day, you are surrounded by <strong>data</strong>. When you check the weather, count your steps, look at your test scores, or scroll through video likes — you are seeing data in action. But data on its own is just… numbers, words, or observations. It only becomes powerful when we turn it into <strong>information</strong> that tells a story.</p>
+
+            <p>That is exactly what this unit is about.</p>
+
+            <p>In the next lessons, you will learn how to <strong>collect, process, evaluate, and present data</strong> — just like real scientists, journalists, and business analysts do. You will start by understanding what data actually is and how it becomes meaningful information. Then you will learn how to ask the right questions, choose the best way to gather data, and organize it so it makes sense.</p>
+
+            <p>But collecting data is only the beginning. You will also discover how to <strong>process</strong> it using tables, charts, and spreadsheet tools, how to <strong>judge</strong> whether data is trustworthy and fair, and how to <strong>present</strong> your findings in a way that others can understand and believe.</p>
+
+            <p>Along the way, you will use digital tools like Google Sheets, Google Forms, and Canva — the same tools professionals use every day. You will also learn how to stay safe online and how to give credit to your sources.</p>
+
+            <p>By the end of this unit, you will complete your very own <strong>data project</strong> from start to finish: choosing a topic, collecting real data, analyzing it, and sharing what you discovered with others.</p>
+
+            <div class="intro-highlight">
+                💬 “Data tells a story. Your job is to find it, check it, and tell it clearly.”
+            </div>
+
+            <div class="intro-footer">
+                🔍📊 Let’s get started, detectives.
+            </div>
+        </div>
+
+        <!-- topic cards: 1 to 11 -->
+        <div class="grid">
+            <!-- topic 1 -->
+            <div class="card" id="topic-1">
+                <div class="topic-number">TOPIC 1</div>
+                <h2>Introduction to Data &amp; Information</h2>
+                <p><strong>Data</strong> = raw facts: <em>25, 30, 28, 27</em> (just numbers).<br>
+                <strong>Information</strong> = data with meaning: <em>“The average temperature this week was 27.5°C.”</em></p>
+                <div class="highlight-box">🌡️ Data in daily life: weather, shopping, health, school, sports.</div>
+                <p><strong>The data cycle:</strong> Collect → Process → Evaluate → Present.</p>
+                <span class="badge-outcome">✅ Explain data vs. information &amp; describe the cycle</span>
+                <div class="card-actions">
+                    <a href="introduction-to-data-and-information.html" target="_blank" class="lesson-link">📖 Introduction to Data &amp; Information →</a>
+                    <a href="#top" class="back-top">↑ Back to top</a>
+                </div>
+            </div>
+
+            <!-- topic 2 -->
+            <div class="card" id="topic-2">
+                <div class="topic-number">TOPIC 2</div>
+                <h2>Setting Objectives for Data Collection</h2>
+                <p>Every data task starts with a <strong>purpose</strong>. A clear objective answers:</p>
+                <ul>
+                    <li>What do we want to find out?</li>
+                    <li>Who or what will we study?</li>
+                    <li>What will we do with the results?</li>
+                </ul>
+                <div class="mini-table">
+                    <div class="mini-row">🚶 “How many students walk to school?”</div>
+                    <div class="mini-row">🌡️ “Average classroom temperature over one week”</div>
+                    <div class="mini-row">⚽ “Most popular sport in Grade 7”</div>
+                </div>
+                <span class="badge-outcome">✅ Write a clear objective before collecting data</span>
+                <div class="card-actions">
+                    <a href="setting-objectives-for-data-collection.html" target="_blank" class="lesson-link">📖 Setting Objectives →</a>
+                    <a href="#top" class="back-top">↑ Back to top</a>
+                </div>
+            </div>
+
+            <!-- topic 3 -->
+            <div class="card" id="topic-3">
+                <div class="topic-number">TOPIC 3</div>
+                <h2>Primary vs. Secondary Data</h2>
+                <div class="mini-table">
+                    <div class="mini-row"><strong>Primary</strong> — you collect it (survey, experiment, observation)</div>
+                    <div class="mini-row"><strong>Secondary</strong> — someone else collected it (books, websites, reports)</div>
+                </div>
+                <p><strong>Examples:</strong> Class survey = primary. Rainfall data from weather agency = secondary.</p>
+                <p>⭐ This unit focuses on <strong>primary data</strong> — you are the data detective!</p>
+                <span class="badge-outcome">✅ Identify primary and secondary sources</span>
+                <div class="card-actions">
+                    <a href="primary-vs-secondary-data.html" target="_blank" class="lesson-link">📖 Primary vs. Secondary Data →</a>
+                    <a href="#top" class="back-top">↑ Back to top</a>
+                </div>
+            </div>
+
+            <!-- topic 4 -->
+            <div class="card" id="topic-4">
+                <div class="topic-number">TOPIC 4</div>
+                <h2>Collecting Primary Data</h2>
+                <p><strong>Methods:</strong> Surveys 📝 · Interviews 🎤 · Observations 👀 · Experiments 🧪</p>
+                <div class="highlight-box">✏️ Good questions: clear, simple, unbiased, with sensible choices (yes/no, scale).</div>
+                <p><strong>Ethics:</strong> ask permission, keep answers private, be respectful.</p>
+                <span class="badge-outcome">✅ Choose a method &amp; design fair questions</span>
+                <div class="card-actions">
+                    <a href="collecting-primary-data.html" target="_blank" class="lesson-link">📖 Collecting Primary Data →</a>
+                    <a href="#top" class="back-top">↑ Back to top</a>
+                </div>
+            </div>
+
+            <!-- topic 5 -->
+            <div class="card" id="topic-5">
+                <div class="topic-number">TOPIC 5</div>
+                <h2>Organizing &amp; Recording Data</h2>
+                <p>Use tables, tally charts, frequency tables — and spreadsheets (Google Sheets / Excel).</p>
+                <div class="mini-table">
+                    <div class="mini-row"><strong>Fruit</strong> <strong>Tally</strong> <strong>Freq</strong></div>
+                    <div class="mini-row">Apple&nbsp;&nbsp;////&nbsp;&nbsp;4</div>
+                    <div class="mini-row">Banana&nbsp;&nbsp;///// //&nbsp;&nbsp;7</div>
+                    <div class="mini-row">Orange&nbsp;&nbsp;///&nbsp;&nbsp;3</div>
+                </div>
+                <p>Basic spreadsheet skills: enter data, name columns, use <code>=SUM</code>, <code>=AVERAGE</code>, <code>=COUNT</code>.</p>
+                <span class="badge-outcome">✅ Organize data in tables &amp; spreadsheets</span>
+                <div class="card-actions">
+                    <a href="organizing-and-recording-data.html" target="_blank" class="lesson-link">📖 Organizing &amp; Recording Data →</a>
+                    <a href="#top" class="back-top">↑ Back to top</a>
+                </div>
+            </div>
+
+            <!-- topic 6 -->
+            <div class="card" id="topic-6">
+                <div class="topic-number">TOPIC 6</div>
+                <h2>Processing Data</h2>
+                <p>Turning raw data into useful information: <strong>Sorting, counting, averages, percentages, grouping.</strong></p>
+                <div class="highlight-box">
+                    =SUM(B2:B10) → total<br>
+                    =AVERAGE(B2:B10) → mean<br>
+                    =COUNT(B2:B10) → how many
+                </div>
+                <p>Software can do this automatically — sort, calculate, and summarise.</p>
+                <span class="badge-outcome">✅ Process data with formulas &amp; tools</span>
+                <div class="card-actions">
+                    <a href="processing-data.html" target="_blank" class="lesson-link">📖 Processing Data →</a>
+                    <a href="#top" class="back-top">↑ Back to top</a>
+                </div>
+            </div>
+
+            <!-- topic 7 -->
+            <div class="card" id="topic-7">
+                <div class="topic-number">TOPIC 7</div>
+                <h2>Evaluating Data &amp; Information</h2>
+                <p><strong>Judge quality:</strong> Is it accurate? Complete? Relevant? Fair? Current?</p>
+                <p>⚠️ Spot problems: biased questions, small sample, missing data, misleading graphs.</p>
+                <span class="badge-outcome">✅ Evaluate reliability and fairness of data</span>
+                <div class="card-actions">
+                    <a href="evaluating-data-and-information.html" target="_blank" class="lesson-link">📖 Evaluating Data &amp; Information →</a>
+                    <a href="#top" class="back-top">↑ Back to top</a>
+                </div>
+            </div>
+
+            <!-- topic 8 -->
+            <div class="card" id="topic-8">
+                <div class="topic-number">TOPIC 8</div>
+                <h2>Presenting Data Visually</h2>
+                <p><strong>Charts make patterns easy to see.</strong> Choose the right type:</p>
+                <div class="chart-example">
+                    <div class="chart-item">
+                        <div class="bar-chart-simple">
+                            <div class="bar" style="height: 70px;"><span>7</span></div>
+                            <div class="bar" style="height: 40px;"><span>4</span></div>
+                            <div class="bar" style="height: 30px;"><span>3</span></div>
+                        </div>
+                        <div class="bar-label">🍎 🍌 🍊</div>
+                        <div class="caption">Bar chart – compare categories</div>
+                    </div>
+                    <div class="chart-item">
+                        <div class="pie-symbol">🥧📊</div>
+                        <div class="caption">Pie chart – parts of a whole</div>
+                    </div>
+                    <div class="chart-item">
+                        <div class="pie-symbol">📈</div>
+                        <div class="caption">Line graph – change over time</div>
+                    </div>
+                </div>
+                <p>Use Google Sheets, Canva, or Infogram. Good design: clear title, labeled axes, proper scale.</p>
+                <span class="badge-outcome">✅ Create appropriate charts using software</span>
+                <div class="card-actions">
+                    <a href="presenting-data-visually.html" target="_blank" class="lesson-link">📖 Presenting Data Visually →</a>
+                    <a href="#top" class="back-top">↑ Back to top</a>
+                </div>
+            </div>
+
+            <!-- topic 9 -->
+            <div class="card" id="topic-9">
+                <div class="topic-number">TOPIC 9</div>
+                <h2>Using Internet Services</h2>
+                <p>Online tools for each stage:</p>
+                <ul>
+                    <li><strong>Collect:</strong> Google Forms, Microsoft Forms</li>
+                    <li><strong>Process:</strong> Google Sheets, Excel Online</li>
+                    <li><strong>Present:</strong> Google Slides, Canva, Infogram</li>
+                    <li><strong>Share:</strong> Drive, email, class website</li>
+                </ul>
+                <p><strong>Stay safe:</strong> protect personal data, respect privacy, credit sources, check reliability (Who? When? Trustworthy?).</p>
+                <span class="badge-outcome">✅ Use internet services safely for data tasks</span>
+                <div class="card-actions">
+                    <a href="using-internet-services.html" target="_blank" class="lesson-link">📖 Using Internet Services →</a>
+                    <a href="#top" class="back-top">↑ Back to top</a>
+                </div>
+            </div>
+
+            <!-- topic 10 -->
+            <div class="card" id="topic-10">
+                <div class="topic-number">TOPIC 10</div>
+                <h2>Presenting Findings</h2>
+                <p>Tell the story: state objective → describe collection → show results (charts) → explain meaning → draw conclusions.</p>
+                <p><strong>Formats:</strong> written report, slides, poster, oral presentation. Match your audience!</p>
+                <span class="badge-outcome">✅ Present data findings clearly and accurately</span>
+                <div class="card-actions">
+                    <a href="presenting-findings.html" target="_blank" class="lesson-link">📖 Presenting Findings →</a>
+                    <a href="#top" class="back-top">↑ Back to top</a>
+                </div>
+            </div>
+
+            <!-- topic 11 -->
+            <div class="card" id="topic-11">
+                <div class="topic-number">TOPIC 11</div>
+                <h2>The Complete Data Project</h2>
+                <p>Put it all together:</p>
+                <ul>
+                    <li>🎯 Set objective</li>
+                    <li>📥 Collect primary data (survey, observation, experiment)</li>
+                    <li>⚙️ Process data (organize, calculate, sort)</li>
+                    <li>🔍 Evaluate (accuracy, fairness, relevance)</li>
+                    <li>📊 Present (charts, tables, reports)</li>
+                    <li>📢 Communicate findings</li>
+                </ul>
+                <p>Work in groups with clear roles — reflect on what worked and what could improve.</p>
+                <span class="badge-outcome">✅ Complete a full data project from start to finish</span>
+                <div class="card-actions">
+                    <a href="the-complete-data-project.html" target="_blank" class="lesson-link">📖 The Complete Data Project →</a>
+                    <a href="#top" class="back-top">↑ Back to top</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- summary table -->
+        <div class="card full-width" id="summary-table" style="margin-top: 0.8rem;">
+            <h2 style="border-left-color: #1e6f9f; font-size: 1.9rem; text-align: center; border-left: none; padding-left: 0;">📋 Topics at a Glance</h2>
+            <table class="summary-table">
+                <thead>
+                    <tr><th>#</th><th>Topic</th><th>Key Focus</th><th>Lesson</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td><a href="#topic-1">Introduction to Data and Information</a></td><td>Data vs. information, the data cycle</td><td><a href="introduction-to-data-and-information.html" target="_blank" class="lesson-mini">📖 Open</a></td></tr>
+                    <tr><td>2</td><td><a href="#topic-2">Setting Objectives</a></td><td>Why every data task starts with a purpose</td><td><a href="setting-objectives.html" target="_blank" class="lesson-mini">📖 Open</a></td></tr>
+                    <tr><td>3</td><td><a href="#topic-3">Primary vs. Secondary Data</a></td><td>Sources of data</td><td><a href="primary-vs-secondary-data.html" target="_blank" class="lesson-mini">📖 Open</a></td></tr>
+                    <tr><td>4</td><td><a href="#topic-4">Collecting Primary Data</a></td><td>Surveys, interviews, observations, experiments</td><td><a href="collecting-primary-data.html" target="_blank" class="lesson-mini">📖 Open</a></td></tr>
+                    <tr><td>5</td><td><a href="#topic-5">Organizing and Recording Data</a></td><td>Tables, tally charts, spreadsheets</td><td><a href="organizing-and-recording-data.html" target="_blank" class="lesson-mini">📖 Open</a></td></tr>
+                    <tr><td>6</td><td><a href="#topic-6">Processing Data</a></td><td>Sorting, counting, averages, formulas</td><td><a href="processing-data.html" target="_blank" class="lesson-mini">📖 Open</a></td></tr>
+                    <tr><td>7</td><td><a href="#topic-7">Evaluating Data</a></td><td>Accuracy, fairness, relevance</td><td><a href="evaluating-data-and-information.html" target="_blank" class="lesson-mini">📖 Open</a></td></tr>
+                    <tr><td>8</td><td><a href="#topic-8">Presenting Data Visually</a></td><td>Charts, graphs, design principles</td><td><a href="presenting-data-visually.html" target="_blank" class="lesson-mini">📖 Open</a></td></tr>
+                    <tr><td>9</td><td><a href="#topic-9">Using Internet Services</a></td><td>Online tools for each stage</td><td><a href="using-internet-services.html" target="_blank" class="lesson-mini">📖 Open</a></td></tr>
+                    <tr><td>10</td><td><a href="#topic-10">Presenting Findings</a></td><td>Communicating results clearly</td><td><a href="presenting-findings.html" target="_blank" class="lesson-mini">📖 Open</a></td></tr>
+                    <tr><td>11</td><td><a href="#topic-11">The Complete Data Project</a></td><td>Applying everything together</td><td><a href="the-complete-data-project.html" target="_blank" class="lesson-mini">📖 Open</a></td></tr>
+                </tbody>
+            </table>
+            <a href="#top" class="back-top" style="align-self: center;">↑ Back to top</a>
+        </div>
+
+        <!-- teaching order + indicator connection (visual) -->
+        <div class="student-outcome" style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: center;">
+            <div><strong>🗺️ Suggested teaching order:</strong> 1 → 2 → 3 → 4 &nbsp;|&nbsp; 5 → 6 → 7 &nbsp;|&nbsp; 8 → 9 → 10 &nbsp;|&nbsp; 11 (culminating)</div>
+            <div style="font-size: 0.95rem; background: #ffffffb3; padding: 0.5rem 1.2rem; border-radius: 30px;">
+                <strong>Indicators 1 &amp; 2:</strong> think logically &amp; build solutions → <strong>Indicator 3:</strong> data literacy
+            </div>
+        </div>
+
+        <!-- core message -->
+        <div class="core-message">
+            💬 “Data tells a story. Our job is to collect it honestly, process it carefully, evaluate it fairly, and present it clearly — so others can understand what we discovered.”
+        </div>
+
+        <div class="footer-note">
+            ⚡ Grade 7 · Data Detectives · Collect, process, evaluate, present — you are the data storyteller!<br>
+            <a href="#top">↑ Back to top</a>
+        </div>
+    </div>
+</body>
+</html>
