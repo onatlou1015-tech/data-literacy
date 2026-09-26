@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 10 · Presenting Findings and Communicating Results</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #eef6ff 0%, #e0eefb 100%);
+            color: #1a2b3c;
+            line-height: 1.6;
+            padding: 1rem;
+            min-height: 100vh;
+        }
+
+        /* ============================================================ */
+        /*  WEBPAGE (LESSON) MODE                                       */
+        /* ============================================================ */
+        .webpage {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 20, 40, 0.35);
+            padding: 2rem 2.5rem 3rem;
+            border: 1px solid #d9e6f2;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2eefb;
+        }
+
+        .back-home {
+            background: #1e6f9f;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            transition: 0.2s;
+            border: 1px solid #4a94c4;
+        }
+
+        .back-home:hover {
+            background: #2d7fb8;
+            transform: translateY(-2px);
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .topic-pill {
+            background: #e2eefb;
+            color: #1e6f9f;
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.4rem 1.1rem;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+            border: 1px solid #b8d4ec;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #0f7a4d, #14995f);
+            color: #ffffff;
+            border: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 800;
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 6px 12px -6px #073a25;
+            border: 1px solid #2fae74;
+            letter-spacing: 0.3px;
+        }
+
+        .start-btn:hover {
+            background: linear-gradient(135deg, #14995f, #1bb574);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 16px -6px #073a25;
+        }
+
+        /* Webpage hero */
+        .web-hero {
+            text-align: center;
+            padding: 1.5rem 1rem 2rem;
+            border-bottom: 2px dashed #d9e6f2;
+            margin-bottom: 2rem;
+        }
+
+        .web-hero .big-icon {
+            font-size: 4.5rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .web-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #0a2e4b;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 0.6rem;
+        }
+
+        .web-hero .hero-sub {
+            font-size: 1.2rem;
+            color: #2c5779;
+            font-weight: 600;
+            margin-bottom: 1.3rem;
+        }
+
+        .web-hero .hero-tagline {
+            display: inline-block;
+            background: #e2f0fa;
+            border-left: 6px solid #1e6f9f;
+            padding: 0.9rem 1.6rem;
+            border-radius: 0 1.2rem 1.2rem 0;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #06283d;
+            font-weight: 500;
+            margin-bottom: 1.3rem;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.3rem;
+        }
+
+        .hero-badge {
+            background: #ffffff;
+            padding: 0.7rem 1.4rem;
+            border-radius: 40px;
+            box-shadow: 0 6px 0 #b8d0e5;
+            color: #13415c;
+            border: 1px solid #b8d0e5;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .hero-badge span {
+            font-size: 1.3rem;
+            margin-right: 6px;
+        }
+
+        /* Webpage sections */
+        .web-section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 1.5rem;
+        }
+
+        .web-section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .web-section-header .step-tag {
+            background: #0f2e44;
+            color: #bfe0ff;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            padding: 0.3rem 0.9rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .web-section-header h2 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #0b2d45;
+            line-height: 1.2;
+        }
+
+        .web-section p {
+            font-size: 1.05rem;
+            color: #1f3d54;
+            margin-bottom: 1rem;
+        }
+
+        .web-section strong {
+            color: #0a3f60;
+        }
+
+        /* Info grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.4rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-grid.three {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .info-box {
+            border-radius: 1.6rem;
+            padding: 1.4rem 1.5rem;
+            border: 2px solid #d9e6f2;
+            background: #fafdff;
+        }
+
+        .info-box.data-box {
+            border-color: #cfe2f5;
+            background: linear-gradient(145deg, #f4faff, #eaf4fe);
+        }
+
+        .info-box.info-box2 {
+            border-color: #d0f0e0;
+            background: linear-gradient(145deg, #f3fdf8, #e6faf1);
+        }
+
+        .info-box.sheet-box {
+            border-color: #e8d5a8;
+            background: linear-gradient(145deg, #fffdf5, #fef8e6);
+        }
+
+        .info-box h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #0b2d45;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-box .icon-lg {
+            font-size: 1.7rem;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.6rem;
+        }
+
+        .info-box li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .info-box li::before {
+            content: "●";
+            color: #1e6f9f;
+            font-size: 0.7rem;
+            margin-top: 0.45rem;
+            flex-shrink: 0;
+        }
+
+        .info-box.info-box2 li::before {
+            color: #0f7a4d;
+        }
+
+        .info-box.sheet-box li::before {
+            color: #b07a1e;
+        }
+
+        /* 5-step structure flow */
+        .story-flow {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin: 1.8rem 0;
+        }
+
+        .story-step {
+            background: linear-gradient(145deg, #ffffff, #f5faff);
+            border-radius: 1.6rem;
+            padding: 1.3rem 0.9rem 1.1rem;
+            border: 2px solid #cfe2f5;
+            box-shadow: 0 10px 0 #dceafa;
+            text-align: center;
+            position: relative;
+            transition: 0.2s;
+        }
+
+        .story-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 0 #c3dbf2;
+        }
+
+        .story-step .step-num {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e6f9f;
+            color: #fff;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #fff;
+        }
+
+        .story-step .story-icon {
+            font-size: 2rem;
+            line-height: 1;
+            margin: 0.4rem 0 0.5rem;
+        }
+
+        .story-step h4 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #0b2d45;
+            margin-bottom: 0.3rem;
+        }
+
+        .story-step p {
+            font-size: 0.78rem;
+            color: #33566f;
+            margin-bottom: 0;
+            line-height: 1.4;
+        }
+
+        /* Presentation format cards */
+        .format-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .format-card {
+            background: linear-gradient(145deg, #fffdf5, #fef8e6);
+            border-radius: 1.6rem;
+            padding: 1.5rem 1.1rem 1.3rem;
+            border: 2px solid #e8d5a8;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .format-card:hover {
+            transform: translateY(-5px);
+            border-color: #d9a441;
+            box-shadow: 0 12px 25px -15px #8a5a10;
+        }
+
+        .format-card .format-icon {
+            font-size: 2.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .format-card h4 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #7a5a10;
+            margin-bottom: 0.4rem;
+        }
+
+        .format-card p {
+            font-size: 0.83rem;
+            color: #5c4408;
+            margin-bottom: 0;
+            line-height: 1.45;
+        }
+
+        /* Audience match cards */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.4rem;
+            margin: 1.5rem 0;
+        }
+
+        .audience-card {
+            border-radius: 1.6rem;
+            padding: 1.4rem 1.5rem;
+            border: 2px solid;
+        }
+
+        .audience-card.kids {
+            border-color: #cfe2f5;
+            background: linear-gradient(145deg, #f4faff, #eaf4fe);
+        }
+
+        .audience-card.adults {
+            border-color: #d0f0e0;
+            background: linear-gradient(145deg, #f3fdf8, #e6faf1);
+        }
+
+        .audience-card h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .audience-card.kids h4 {
+            color: #1e6f9f;
+        }
+
+        .audience-card.adults h4 {
+            color: #0b5e3c;
+        }
+
+        .audience-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .audience-card li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .audience-card li::before {
+            content: "✔";
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .audience-card.kids li::before {
+            color: #1e6f9f;
+        }
+
+        .audience-card.adults li::before {
+            color: #0b5e3c;
+        }
+
+        /* Report anatomy visual */
+        .report-anatomy {
+            background: #ffffff;
+            border-radius: 1.6rem;
+            padding: 1.5rem 1.7rem;
+            border: 2px solid #cfe2f5;
+            box-shadow: 0 12px 25px -15px #1a4a6e80;
+            margin: 1.8rem 0;
+        }
+
+        .report-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0.9rem 0;
+            border-bottom: 1px dashed #d9e6f2;
+        }
+
+        .report-row:last-child {
+            border-bottom: none;
+        }
+
+        .report-row .row-icon {
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .report-row .row-text {
+            flex: 1;
+        }
+
+        .report-row .row-text h4 {
+            font-size: 1.02rem;
+            font-weight: 800;
+            color: #0b2d45;
+            margin-bottom: 0.2rem;
+        }
+
+        .report-row .row-text p {
+            font-size: 0.9rem;
+            color: #33566f;
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        /* Story vs data visual */
+        .story-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.4rem;
+            margin: 1.5rem 0;
+        }
+
+        .story-card {
+            border-radius: 1.6rem;
+            padding: 1.4rem 1.5rem;
+            border: 2px solid;
+        }
+
+        .story-card.boring {
+            border-color: #d9e6f2;
+            background: #f8fafc;
+        }
+
+        .story-card.engaging {
+            border-color: #6cb99c;
+            background: linear-gradient(145deg, #f3fdf8, #e0f7ec);
+        }
+
+        .story-card h4 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .story-card.boring h4 {
+            color: #5a6a7a;
+        }
+
+        .story-card.engaging h4 {
+            color: #0b5e3c;
+        }
+
+        .story-card .story-quote {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 1rem;
+            padding: 0.8rem 1rem;
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-bottom: 0.6rem;
+            line-height: 1.5;
+        }
+
+        .story-card.boring .story-quote {
+            color: #3a4a5a;
+            border-left: 4px solid #a0b0c0;
+        }
+
+        .story-card.engaging .story-quote {
+            color: #134d33;
+            border-left: 4px solid #0b5e3c;
+        }
+
+        .story-card .story-why {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .story-card.boring .story-why {
+            color: #5a6a7a;
+        }
+
+        .story-card.engaging .story-why {
+            color: #0b5e3c;
+        }
+
+        /* Key points */
+        .key-points {
+            background: linear-gradient(135deg, #0f2e44, #14425e);
+            color: #f0f9ff;
+            border-radius: 1.8rem;
+            padding: 1.6rem 2rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 15px 25px -12px #092c42;
+        }
+
+        .key-points h3 {
+            color: #bfe0ff;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .key-points ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .key-points li {
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            font-size: 1.02rem;
+        }
+
+        .key-points li::before {
+            content: "✔";
+            color: #5fd68a;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        /* Discussion */
+        .discussion-box {
+            background: #f4faff;
+            border-radius: 1.6rem;
+            padding: 1.5rem 1.8rem;
+            border-left: 8px solid #1e6f9f;
+            margin: 1.5rem 0;
+        }
+
+        .discussion-box h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #0a3f60;
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .discussion-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .discussion-box li {
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 1rem;
+            color: #1f3d54;
+        }
+
+        .discussion-box li::before {
+            content: "💬";
+            flex-shrink: 0;
+        }
+
+        /* Activity */
+        .activity-box {
+            background: linear-gradient(135deg, #fff8e6, #fef3d6);
+            border-radius: 1.6rem;
+            padding: 1.5rem 1.8rem;
+            border: 2px solid #f0d89c;
+            margin: 1.5rem 0;
+        }
+
+        .activity-box h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #7a5a10;
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .activity-box ol {
+            padding-left: 1.4rem;
+            color: #5c4408;
+        }
+
+        .activity-box ol li {
+            margin-bottom: 0.6rem;
+            font-size: 1rem;
+        }
+
+        /* Outcome banner */
+        .outcome-banner {
+            background: linear-gradient(135deg, #d9f0e4, #c2ebd6);
+            border-radius: 1.6rem;
+            padding: 1.3rem 1.8rem;
+            border: 2px solid #6cb99c;
+            margin: 1.8rem 0 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            font-weight: 700;
+            color: #0b5e3c;
+            font-size: 1.05rem;
+        }
+
+        .outcome-banner .outcome-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        /* ============================================================ */
+        /*  TEACHER INSTRUCTIONS SECTION (SIMPLE)                       */
+        /* ============================================================ */
+        .teacher-section {
+            margin-top: 3rem;
+            border-radius: 1.6rem;
+            overflow: hidden;
+            border: 3px dashed #c48a2c;
+            background: linear-gradient(145deg, #fffaf0, #fff4e0);
+            box-shadow: 0 12px 25px -15px #8a5a10;
+        }
+
+        .teacher-header {
+            background: linear-gradient(135deg, #8a5a10, #b07a1e);
+            color: #ffffff;
+            padding: 1rem 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+
+        .teacher-header .teacher-icon {
+            font-size: 1.5rem;
+        }
+
+        .teacher-header h2 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+        }
+
+        .teacher-body {
+            padding: 1.4rem 1.6rem 1.6rem;
+        }
+
+        .teacher-note {
+            background: #fffdf5;
+            border: 2px dashed #e0b75c;
+            border-radius: 1rem;
+            padding: 1rem 1.2rem;
+            font-size: 0.98rem;
+            color: #4a3a12;
+            min-height: 90px;
+            line-height: 1.7;
+        }
+
+        .teacher-note[contenteditable="true"]:focus {
+            outline: 3px solid #f0c674;
+            background: #fffef9;
+        }
+
+        .edit-hint {
+            font-size: 0.78rem;
+            color: #a17f2e;
+            margin-top: 0.6rem;
+            display: block;
+            font-style: italic;
+            text-align: right;
+        }
+
+        /* Presentation CTA */
+        .present-cta {
+            text-align: center;
+            background: linear-gradient(135deg, #0f2e44, #1a4f72);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-top: 2.5rem;
+            color: #f0f9ff;
+        }
+
+        .present-cta h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
+            color: #bfe0ff;
+        }
+
+        .present-cta p {
+            color: #d4ecff;
+            margin-bottom: 1.3rem;
+            font-size: 1rem;
+        }
+
+        .present-cta .start-btn {
+            font-size: 1.05rem;
+            padding: 0.85rem 2rem;
+        }
+
+        /* ============================================================ */
+        /*  PRESENTATION MODE                                          */
+        /* ============================================================ */
+        body.presenting {
+            background: #0a1e2e;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body.presenting .webpage {
+            display: none !important;
+        }
+
+        .presentation {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(145deg, #eef6ff 0%, #e0eefb 100%);
+            padding: 1.5rem;
+            overflow-y: auto;
+            z-index: 9999;
+        }
+
+        body.presenting .presentation {
+            display: block;
+        }
+
+        .presentation-inner {
+            max-width: 1150px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 20, 40, 0.4);
+            padding: 2rem 2.5rem 2.5rem;
+            border: 1px solid #d9e6f2;
+            position: relative;
+            min-height: calc(100vh - 3rem);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .exit-btn {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: #ffe6e6;
+            color: #b32d2d;
+            border: 1px solid #f5b8b8;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.5rem 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+            z-index: 10;
+        }
+
+        .exit-btn:hover {
+            background: #b32d2d;
+            color: #fff;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.4s ease;
+            flex: 1;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .slide-header .slide-num {
+            display: inline-block;
+            background: #0f2e44;
+            color: #bfe0ff;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .slide-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0b2d45;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .slide-header h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0b2d45;
+            line-height: 1.25;
+        }
+
+        .title-divider {
+            width: 90px;
+            height: 5px;
+            background: linear-gradient(90deg, #1e6f9f, #5fb3e0);
+            border-radius: 10px;
+            margin: 1rem auto 0;
+        }
+
+        .slide-body {
+            font-size: 1.08rem;
+            color: #1f3d54;
+        }
+
+        .slide-body p {
+            margin-bottom: 1rem;
+        }
+
+        .slide-body strong {
+            color: #0a3f60;
+        }
+
+        .hero-slide {
+            text-align: center;
+            padding: 1.5rem 1rem 2rem;
+        }
+
+        .hero-slide .big-icon {
+            font-size: 5rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-slide h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #0a2e4b;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-slide .hero-sub {
+            font-size: 1.35rem;
+            color: #2c5779;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-slide .hero-tagline {
+            display: inline-block;
+            background: #e2f0fa;
+            border-left: 6px solid #1e6f9f;
+            padding: 0.9rem 1.6rem;
+            border-radius: 0 1.2rem 1.2rem 0;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #06283d;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .slide-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #e2eefb;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #1e6f9f, #2d7fb8);
+            color: #ffffff;
+            border: none;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 0.7rem 1.6rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 6px 12px -6px #0a3a58;
+            border: 1px solid #4a94c4;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, #2d7fb8, #3a8bb9);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 16px -6px #0a3a58;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .nav-btn.secondary {
+            background: #eaf3fb;
+            color: #1e6f9f;
+            border: 1px solid #b8d4ec;
+            box-shadow: none;
+        }
+
+        .nav-btn.secondary:hover:not(:disabled) {
+            background: #1e6f9f;
+            color: #fff;
+        }
+
+        .slide-counter {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #1e6f9f;
+            background: #eaf3fb;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            border: 1px solid #b8d4ec;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2eefb;
+            border-radius: 10px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #1e6f9f, #5fb3e0);
+            border-radius: 10px;
+            transition: width 0.35s ease;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            .webpage {
+                padding: 1.4rem 1.2rem 2rem;
+            }
+            .web-hero h1 {
+                font-size: 2rem;
+            }
+            .web-section-header h2 {
+                font-size: 1.4rem;
+            }
+            .info-grid,
+            .info-grid.three,
+            .story-flow,
+            .format-grid,
+            .audience-grid,
+            .story-compare {
+                grid-template-columns: 1fr;
+            }
+            .presentation-inner {
+                padding: 1.4rem 1.2rem 1.8rem;
+            }
+            .hero-slide h1 {
+                font-size: 2.2rem;
+            }
+            .slide-header h1,
+            .slide-header h2 {
+                font-size: 1.5rem;
+            }
+            .nav-btn {
+                padding: 0.6rem 1.1rem;
+                font-size: 0.85rem;
+            }
+            .exit-btn {
+                position: static;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!--  WEBPAGE (LESSON) VIEW                                       -->
+    <!-- ============================================================ -->
+    <div class="webpage" id="webpageView">
+
+        <!-- Top bar -->
+        <div class="top-bar">
+            <a href="index.html" class="back-home">← Back to Main Page</a>
+            <div class="top-actions">
+                <span class="topic-pill">TOPIC 10 · DATA LITERACY</span>
+                <button class="start-btn" onclick="startPresentation()">▶ Start Presentation</button>
+            </div>
+        </div>
+
+        <!-- Hero -->
+        <div class="web-hero">
+            <div class="big-icon">📢📊🗣️</div>
+            <h1>Presenting Findings and<br>Communicating Results</h1>
+            <p class="hero-sub">Grade 7 · Data Detectives Unit</p>
+            <div class="hero-tagline">
+                💬 “Your data is only as powerful as the story you tell with it.”
+            </div>
+            <div class="hero-badges">
+                <div class="hero-badge"><span>📖</span> Report</div>
+                <div class="hero-badge"><span>📊</span> Slides</div>
+                <div class="hero-badge"><span>🖼️</span> Poster</div>
+                <div class="hero-badge"><span>🎤</span> Talk</div>
+            </div>
+        </div>
+
+        <!-- SECTION 1 · HOW TO PRESENT FINDINGS CLEARLY -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Part 1</span>
+                <h2>How to Present Findings Clearly</h2>
+            </div>
+            <p style="font-size:1.15rem;">
+                A good presentation follows a <strong>clear structure</strong>. Every data story should answer five things in this order:
+            </p>
+
+            <div class="story-flow">
+                <div class="story-step">
+                    <div class="step-num">1</div>
+                    <div class="story-icon">🎯</div>
+                    <h4>State the Objective</h4>
+                    <p>What did we want to find out?</p>
+                </div>
+                <div class="story-step">
+                    <div class="step-num">2</div>
+                    <div class="story-icon">📥</div>
+                    <h4>Describe Collection</h4>
+                    <p>How did we collect the data?</p>
+                </div>
+                <div class="story-step">
+                    <div class="step-num">3</div>
+                    <div class="story-icon">📊</div>
+                    <h4>Show the Results</h4>
+                    <p>Charts and tables that tell the story.</p>
+                </div>
+                <div class="story-step">
+                    <div class="step-num">4</div>
+                    <div class="story-icon">💡</div>
+                    <h4>Explain Meaning</h4>
+                    <p>What does the data tell us?</p>
+                </div>
+                <div class="story-step">
+                    <div class="step-num">5</div>
+                    <div class="story-icon">✅</div>
+                    <h4>Draw Conclusions</h4>
+                    <p>What should we do next?</p>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h3>💡 Key Idea</h3>
+                <ul>
+                    <li>A clear structure makes your findings <strong>easy to follow and remember</strong>.</li>
+                    <li>Always start with the objective — it gives the audience a reason to listen.</li>
+                    <li>End with a conclusion or recommendation — what should happen next?</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 2 · ANATOMY OF A DATA REPORT -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Part 2</span>
+                <h2>Anatomy of a Data Report</h2>
+            </div>
+            <p style="font-size:1.1rem;">
+                Whether written or spoken, a data report has the same parts. Here is what each section does:
+            </p>
+
+            <div class="report-anatomy">
+                <div class="report-row">
+                    <div class="row-icon">🎯</div>
+                    <div class="row-text">
+                        <h4>1. Objective</h4>
+                        <p><em>"Our goal was to find out the most popular fruit in Grade 7."</em></p>
+                    </div>
+                </div>
+                <div class="report-row">
+                    <div class="row-icon">📥</div>
+                    <div class="row-text">
+                        <h4>2. Method</h4>
+                        <p><em>"We surveyed 30 students using a Google Form with 1 question and 5 choices."</em></p>
+                    </div>
+                </div>
+                <div class="report-row">
+                    <div class="row-icon">📊</div>
+                    <div class="row-text">
+                        <h4>3. Results</h4>
+                        <p><em>"Banana was the top choice with 7 votes, followed by Apple (4) and Orange (3)."</em></p>
+                    </div>
+                </div>
+                <div class="report-row">
+                    <div class="row-icon">💡</div>
+                    <div class="row-text">
+                        <h4>4. Meaning</h4>
+                        <p><em>"Banana is the clear favourite — nearly twice as popular as Orange."</em></p>
+                    </div>
+                </div>
+                <div class="report-row">
+                    <div class="row-icon">✅</div>
+                    <div class="row-text">
+                        <h4>5. Conclusion</h4>
+                        <p><em>"For a healthy snack day, we should offer bananas as the main option."</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h3>💡 Key Idea</h3>
+                <ul>
+                    <li>Every data report — written, spoken, or visual — should include these <strong>five parts</strong>.</li>
+                    <li>Keep each part <strong>short and clear</strong>. Don't overload the audience.</li>
+                    <li>Data is persuasive when it is paired with <strong>a clear message</strong>.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 3 · PRESENTATION FORMATS -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Part 3</span>
+                <h2>Presentation Formats</h2>
+            </div>
+            <p style="font-size:1.1rem;">
+                You can present your findings in different ways. Each format works best for a different situation.
+            </p>
+
+            <div class="format-grid">
+                <div class="format-card">
+                    <div class="format-icon">📖</div>
+                    <h4>Written Report</h4>
+                    <p>Best for detailed analysis. Can be shared and re-read.</p>
+                </div>
+                <div class="format-card">
+                    <div class="format-icon">📊</div>
+                    <h4>Slide Presentation</h4>
+                    <p>Great for speaking to a group. Uses visuals and short text.</p>
+                </div>
+                <div class="format-card">
+                    <div class="format-icon">🖼️</div>
+                    <h4>Poster</h4>
+                    <p>Shows your findings at a glance. Good for display boards.</p>
+                </div>
+                <div class="format-card">
+                    <div class="format-icon">🎤</div>
+                    <h4>Oral Presentation</h4>
+                    <p>Talking through your findings live. Engaging and personal.</p>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h3>💡 Key Idea</h3>
+                <ul>
+                    <li>Choose the format that fits your <strong>audience</strong> and your <strong>time limit</strong>.</li>
+                    <li>A slide presentation usually combines <strong>visuals and speaking</strong>.</li>
+                    <li>A poster works well when people walk past and read on their own.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 4 · MATCHING THE PRESENTATION TO THE AUDIENCE -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Part 4</span>
+                <h2>Matching the Presentation to the Audience</h2>
+            </div>
+            <p style="font-size:1.1rem;">
+                The same data can be presented differently for different audiences. Always ask: <strong>Who am I presenting to?</strong>
+            </p>
+
+            <div class="audience-grid">
+                <div class="audience-card kids">
+                    <h4>👧 Presenting to Younger Students</h4>
+                    <ul>
+                        <li>Use big, colourful charts</li>
+                        <li>Keep language simple</li>
+                        <li>Use pictograms and icons</li>
+                        <li>Short sentences and clear numbers</li>
+                    </ul>
+                </div>
+                <div class="audience-card adults">
+                    <h4>🧑‍💼 Presenting to Teachers or Adults</h4>
+                    <ul>
+                        <li>Use detailed charts and tables</li>
+                        <li>Include method and sample size</li>
+                        <li>Give percentages and averages</li>
+                        <li>End with a recommendation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h3>💡 Key Idea</h3>
+                <ul>
+                    <li>The same data can be shown <strong>in different ways</strong> depending on who is listening.</li>
+                    <li>Good presenters <strong>adjust their message</strong> to their audience.</li>
+                    <li>Always think: <em>What does my audience need to know?</em></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 5 · TELLING THE STORY BEHIND THE DATA -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Part 5</span>
+                <h2>Telling the Story Behind the Data</h2>
+            </div>
+            <p style="font-size:1.1rem;">
+                Data becomes powerful when you tell the <strong>story</strong> behind it. Compare the two examples below.
+            </p>
+
+            <div class="story-compare">
+                <div class="story-card boring">
+                    <h4>😴 Just Data</h4>
+                    <div class="story-quote">"We surveyed 30 students. Banana got 7 votes. Apple got 4. Orange got 3."</div>
+                    <p class="story-why">Boring — just a list of numbers. No meaning.</p>
+                </div>
+                <div class="story-card engaging">
+                    <h4>✨ Data with a Story</h4>
+                    <div class="story-quote">"We wanted to find the top snack for our class. After asking 30 students, one fruit stood out — banana, chosen by nearly one in four of us. So for our next healthy snack day, bananas should be the star."</div>
+                    <p class="story-why">Engaging — tells the objective, the result, and what to do next.</p>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h3>💡 Key Idea</h3>
+                <ul>
+                    <li>Numbers alone are not a story. <strong>Meaning and action</strong> make it one.</li>
+                    <li>Start with <strong>why</strong> you collected the data.</li>
+                    <li>End with <strong>what should happen next</strong>.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 6 · ACTIVITY -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Activity</span>
+                <h2>Let's Practise! 🎯</h2>
+            </div>
+
+            <div class="activity-box">
+                <h3>📝 Activity 1: Structure the Story</h3>
+                <ol>
+                    <li>Use the fruit survey data: Apple 4 · Banana 7 · Orange 3.</li>
+                    <li>Write one sentence for each of the <strong>five parts</strong>: Objective, Method, Results, Meaning, Conclusion.</li>
+                    <li>Share it with a partner and compare structures.</li>
+                </ol>
+            </div>
+
+            <div class="activity-box">
+                <h3>🛠️ Activity 2: Match the Format</h3>
+                <ol>
+                    <li>Which format would you choose if you had 2 minutes to present?</li>
+                    <li>Which format for a parent visiting the classroom?</li>
+                    <li>Which format to send to the principal for review?</li>
+                    <li>Explain your reasoning for each choice.</li>
+                </ol>
+            </div>
+
+            <div class="activity-box">
+                <h3>✍️ Activity 3: Rewrite the Story</h3>
+                <ol>
+                    <li>Here is boring data: <em>"We asked 20 students. 12 said yes, 8 said no."</em></li>
+                    <li>Rewrite it as an <strong>engaging story</strong> with a purpose and a conclusion.</li>
+                    <li>Swap with a partner to compare styles.</li>
+                </ol>
+            </div>
+
+            <div class="discussion-box">
+                <h3>💬 Class Discussion</h3>
+                <ul>
+                    <li>Why does the order of the five parts matter?</li>
+                    <li>How would you change your presentation for a group of teachers vs. a group of Grade 3 students?</li>
+                    <li>What makes a data presentation convincing and memorable?</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 7 · SUMMARY -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Summary</span>
+                <h2>What We Learned Today</h2>
+            </div>
+            <div class="key-points">
+                <h3>📌 Key Takeaways</h3>
+                <ul>
+                    <li>Present data using <strong>five parts</strong>: Objective → Method → Results → Meaning → Conclusion.</li>
+                    <li>Choose a <strong>format</strong> that fits your audience: report, slides, poster, or talk.</li>
+                    <li><strong>Match your presentation</strong> to who is listening.</li>
+                    <li>Turn numbers into a <strong>story</strong> — start with why, end with what's next.</li>
+                </ul>
+            </div>
+            <div class="outcome-banner">
+                <span class="outcome-icon">🎓</span>
+                <span><strong>Student Outcome:</strong> You can now present data findings clearly and accurately, in a way that fits your audience.</span>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TEACHER INSTRUCTIONS SECTION (SIMPLE)                        -->
+        <!-- ============================================================ -->
+        <section class="teacher-section" id="teacher-instructions">
+            <div class="teacher-header">
+                <span class="teacher-icon">👩‍🏫</span>
+                <h2>Teacher Instructions</h2>
+            </div>
+            <div class="teacher-body">
+                <div class="teacher-note" contenteditable="true">
+                    Take the ZipGrade quiz.<br>
+                    Submit the work on time.
+                </div>
+                <span class="edit-hint">✏️ Click to edit. Changes are temporary (refresh will reset).</span>
+            </div>
+        </section>
+
+        <!-- CTA to start presentation -->
+        <div class="present-cta">
+            <h3>🎬 Ready to present?</h3>
+            <p>Switch to full-screen presentation mode with slides and keyboard navigation.</p>
+            <button class="start-btn" onclick="startPresentation()">▶ Start Presentation</button>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!--  PRESENTATION MODE                                           -->
+    <!-- ============================================================ -->
+    <div class="presentation" id="presentationView">
+        <div class="presentation-inner">
+
+            <button class="exit-btn" onclick="exitPresentation()">✕ Exit Presentation</button>
+
+            <!-- SLIDE 1 · TITLE -->
+            <section class="slide active" id="slide-1">
+                <div class="hero-slide">
+                    <div class="big-icon">📢📊🗣️</div>
+                    <h1>Presenting Findings and<br>Communicating Results</h1>
+                    <p class="hero-sub">Grade 7 · Data Detectives Unit</p>
+                    <div class="hero-tagline">
+                        💬 “Your data is only as powerful as the story you tell with it.”
+                    </div>
+                    <div class="hero-badges">
+                        <div class="hero-badge"><span>📖</span> Report</div>
+                        <div class="hero-badge"><span>📊</span> Slides</div>
+                        <div class="hero-badge"><span>🖼️</span> Poster</div>
+                        <div class="hero-badge"><span>🎤</span> Talk</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 2 · FIVE STEPS -->
+            <section class="slide" id="slide-2">
+                <div class="slide-header">
+                    <span class="slide-num">PART 1</span>
+                    <h2>How to Present Findings Clearly</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="story-flow">
+                        <div class="story-step">
+                            <div class="step-num">1</div>
+                            <div class="story-icon">🎯</div>
+                            <h4>Objective</h4>
+                            <p>What did we want to find out?</p>
+                        </div>
+                        <div class="story-step">
+                            <div class="step-num">2</div>
+                            <div class="story-icon">📥</div>
+                            <h4>Method</h4>
+                            <p>How did we collect data?</p>
+                        </div>
+                        <div class="story-step">
+                            <div class="step-num">3</div>
+                            <div class="story-icon">📊</div>
+                            <h4>Results</h4>
+                            <p>Charts and tables.</p>
+                        </div>
+                        <div class="story-step">
+                            <div class="step-num">4</div>
+                            <div class="story-icon">💡</div>
+                            <h4>Meaning</h4>
+                            <p>What does it mean?</p>
+                        </div>
+                        <div class="story-step">
+                            <div class="step-num">5</div>
+                            <div class="story-icon">✅</div>
+                            <h4>Conclusion</h4>
+                            <p>What should we do next?</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 3 · ANATOMY OF A REPORT -->
+            <section class="slide" id="slide-3">
+                <div class="slide-header">
+                    <span class="slide-num">PART 2</span>
+                    <h2>Anatomy of a Data Report</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="report-anatomy">
+                        <div class="report-row">
+                            <div class="row-icon">🎯</div>
+                            <div class="row-text">
+                                <h4>1. Objective</h4>
+                                <p><em>"Our goal was to find the most popular fruit in Grade 7."</em></p>
+                            </div>
+                        </div>
+                        <div class="report-row">
+                            <div class="row-icon">📥</div>
+                            <div class="row-text">
+                                <h4>2. Method</h4>
+                                <p><em>"We surveyed 30 students using a Google Form."</em></p>
+                            </div>
+                        </div>
+                        <div class="report-row">
+                            <div class="row-icon">📊</div>
+                            <div class="row-text">
+                                <h4>3. Results</h4>
+                                <p><em>"Banana got 7 votes, Apple 4, Orange 3."</em></p>
+                            </div>
+                        </div>
+                        <div class="report-row">
+                            <div class="row-icon">💡</div>
+                            <div class="row-text">
+                                <h4>4. Meaning</h4>
+                                <p><em>"Banana is nearly twice as popular as Orange."</em></p>
+                            </div>
+                        </div>
+                        <div class="report-row">
+                            <div class="row-icon">✅</div>
+                            <div class="row-text">
+                                <h4>5. Conclusion</h4>
+                                <p><em>"Offer bananas as the main snack option."</em></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 4 · FORMATS -->
+            <section class="slide" id="slide-4">
+                <div class="slide-header">
+                    <span class="slide-num">PART 3</span>
+                    <h2>Presentation Formats</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="format-grid">
+                        <div class="format-card">
+                            <div class="format-icon">📖</div>
+                            <h4>Written Report</h4>
+                            <p>Detailed and re-readable.</p>
+                        </div>
+                        <div class="format-card">
+                            <div class="format-icon">📊</div>
+                            <h4>Slides</h4>
+                            <p>Great for speaking to a group.</p>
+                        </div>
+                        <div class="format-card">
+                            <div class="format-icon">🖼️</div>
+                            <h4>Poster</h4>
+                            <p>Shows findings at a glance.</p>
+                        </div>
+                        <div class="format-card">
+                            <div class="format-icon">🎤</div>
+                            <h4>Oral Talk</h4>
+                            <p>Live and personal.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 5 · AUDIENCE -->
+            <section class="slide" id="slide-5">
+                <div class="slide-header">
+                    <span class="slide-num">PART 4</span>
+                    <h2>Matching to Your Audience</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="audience-grid">
+                        <div class="audience-card kids">
+                            <h4>👧 For Younger Students</h4>
+                            <ul>
+                                <li>Big, colourful charts</li>
+                                <li>Simple language</li>
+                                <li>Pictograms and icons</li>
+                                <li>Short sentences</li>
+                            </ul>
+                        </div>
+                        <div class="audience-card adults">
+                            <h4>🧑‍💼 For Teachers / Adults</h4>
+                            <ul>
+                                <li>Detailed charts and tables</li>
+                                <li>Method and sample size</li>
+                                <li>Percentages and averages</li>
+                                <li>Clear recommendation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 6 · STORYTELLING -->
+            <section class="slide" id="slide-6">
+                <div class="slide-header">
+                    <span class="slide-num">PART 5</span>
+                    <h2>Telling the Story Behind the Data</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="story-compare">
+                        <div class="story-card boring">
+                            <h4>😴 Just Data</h4>
+                            <div class="story-quote">"We surveyed 30 students. Banana got 7 votes. Apple got 4. Orange got 3."</div>
+                            <p class="story-why">Boring — no meaning, no action.</p>
+                        </div>
+                        <div class="story-card engaging">
+                            <h4>✨ Data with a Story</h4>
+                            <div class="story-quote">"One fruit stood out — banana, chosen by nearly one in four of us. For our next snack day, bananas should be the star."</div>
+                            <p class="story-why">Engaging — purpose, meaning, and action.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 7 · ACTIVITY -->
+            <section class="slide" id="slide-7">
+                <div class="slide-header">
+                    <span class="slide-num">ACTIVITY</span>
+                    <h2>Let's Practise! 🎯</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="activity-box">
+                        <h3>📝 Activity 1: Structure the Story</h3>
+                        <ol>
+                            <li>Use fruit data: Apple 4, Banana 7, Orange 3.</li>
+                            <li>Write one sentence for each of the five parts.</li>
+                            <li>Compare with a partner.</li>
+                        </ol>
+                    </div>
+                    <div class="activity-box">
+                        <h3>🛠️ Activity 2: Match the Format</h3>
+                        <ol>
+                            <li>2-minute presentation → ?</li>
+                            <li>Parent visiting → ?</li>
+                            <li>Report for principal → ?</li>
+                        </ol>
+                    </div>
+                    <div class="activity-box">
+                        <h3>✍️ Activity 3: Rewrite the Story</h3>
+                        <ol>
+                            <li>"We asked 20 students. 12 said yes, 8 said no."</li>
+                            <li>Rewrite as an engaging story.</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 8 · SUMMARY -->
+            <section class="slide" id="slide-8">
+                <div class="slide-header">
+                    <span class="slide-num">SUMMARY</span>
+                    <h2>What We Learned Today</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="key-points">
+                        <h3>📌 Key Takeaways</h3>
+                        <ul>
+                            <li>Use the five parts: <strong>Objective → Method → Results → Meaning → Conclusion</strong>.</li>
+                            <li>Choose a format that fits: <strong>report, slides, poster, or talk</strong>.</li>
+                            <li><strong>Match your presentation</strong> to your audience.</li>
+                            <li>Turn numbers into a <strong>story</strong> — start with why, end with what's next.</li>
+                        </ul>
+                    </div>
+                    <div class="outcome-banner">
+                        <span class="outcome-icon">🎓</span>
+                        <span><strong>Student Outcome:</strong> You can now present data findings clearly and accurately, in a way that fits your audience.</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NAV -->
+            <div class="slide-nav">
+                <button class="nav-btn secondary" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+                <span class="slide-counter" id="counter">Slide 1 / 8</span>
+                <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 12.5%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== PRESENTATION MODE =====
+        const slides = document.querySelectorAll('.slide');
+        const counter = document.getElementById('counter');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressFill = document.getElementById('progressFill');
+        let current = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            counter.textContent = `Slide ${index + 1} / ${slides.length}`;
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === slides.length - 1;
+            progressFill.style.width = ((index + 1) / slides.length * 100) + '%';
+            document.querySelector('.presentation').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function changeSlide(direction) {
+            const newIndex = current + direction;
+            if (newIndex >= 0 && newIndex < slides.length) {
+                current = newIndex;
+                showSlide(current);
+            }
+        }
+
+        function startPresentation() {
+            document.body.classList.add('presenting');
+            current = 0;
+            showSlide(0);
+            const el = document.documentElement;
+            if (el.requestFullscreen) {
+                el.requestFullscreen().catch(() => {});
+            } else if (el.webkitRequestFullscreen) {
+                el.webkitRequestFullscreen();
+            }
+        }
+
+        function exitPresentation() {
+            document.body.classList.remove('presenting');
+            if (document.fullscreenElement) {
+                document.exitFullscreen().catch(() => {});
+            } else if (document.webkitFullscreenElement) {
+                document.webkitExitFullscreen();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (!document.body.classList.contains('presenting')) return;
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                changeSlide(1);
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                changeSlide(-1);
+            }
+            if (e.key === 'Escape') {
+                exitPresentation();
+            }
+        });
+
+        showSlide(0);
+    </script>
+</body>
+</html>

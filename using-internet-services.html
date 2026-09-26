@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 9 · Using Internet Services for Data Work</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #eef6ff 0%, #e0eefb 100%);
+            color: #1a2b3c;
+            line-height: 1.6;
+            padding: 1rem;
+            min-height: 100vh;
+        }
+
+        /* ============================================================ */
+        /*  WEBPAGE (LESSON) MODE                                       */
+        /* ============================================================ */
+        .webpage {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 20, 40, 0.35);
+            padding: 2rem 2.5rem 3rem;
+            border: 1px solid #d9e6f2;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2eefb;
+        }
+
+        .back-home {
+            background: #1e6f9f;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            transition: 0.2s;
+            border: 1px solid #4a94c4;
+        }
+
+        .back-home:hover {
+            background: #2d7fb8;
+            transform: translateY(-2px);
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .topic-pill {
+            background: #e2eefb;
+            color: #1e6f9f;
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.4rem 1.1rem;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+            border: 1px solid #b8d4ec;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #0f7a4d, #14995f);
+            color: #ffffff;
+            border: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 800;
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 6px 12px -6px #073a25;
+            border: 1px solid #2fae74;
+            letter-spacing: 0.3px;
+        }
+
+        .start-btn:hover {
+            background: linear-gradient(135deg, #14995f, #1bb574);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 16px -6px #073a25;
+        }
+
+        /* Webpage hero */
+        .web-hero {
+            text-align: center;
+            padding: 1.5rem 1rem 2rem;
+            border-bottom: 2px dashed #d9e6f2;
+            margin-bottom: 2rem;
+        }
+
+        .web-hero .big-icon {
+            font-size: 4.5rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .web-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #0a2e4b;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 0.6rem;
+        }
+
+        .web-hero .hero-sub {
+            font-size: 1.2rem;
+            color: #2c5779;
+            font-weight: 600;
+            margin-bottom: 1.3rem;
+        }
+
+        .web-hero .hero-tagline {
+            display: inline-block;
+            background: #e2f0fa;
+            border-left: 6px solid #1e6f9f;
+            padding: 0.9rem 1.6rem;
+            border-radius: 0 1.2rem 1.2rem 0;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #06283d;
+            font-weight: 500;
+            margin-bottom: 1.3rem;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.3rem;
+        }
+
+        .hero-badge {
+            background: #ffffff;
+            padding: 0.7rem 1.4rem;
+            border-radius: 40px;
+            box-shadow: 0 6px 0 #b8d0e5;
+            color: #13415c;
+            border: 1px solid #b8d0e5;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .hero-badge span {
+            font-size: 1.3rem;
+            margin-right: 6px;
+        }
+
+        /* Webpage sections */
+        .web-section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 1.5rem;
+        }
+
+        .web-section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .web-section-header .step-tag {
+            background: #0f2e44;
+            color: #bfe0ff;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            padding: 0.3rem 0.9rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .web-section-header h2 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #0b2d45;
+            line-height: 1.2;
+        }
+
+        .web-section p {
+            font-size: 1.05rem;
+            color: #1f3d54;
+            margin-bottom: 1rem;
+        }
+
+        .web-section strong {
+            color: #0a3f60;
+        }
+
+        /* Info grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.4rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-grid.three {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .info-box {
+            border-radius: 1.6rem;
+            padding: 1.4rem 1.5rem;
+            border: 2px solid #d9e6f2;
+            background: #fafdff;
+        }
+
+        .info-box.data-box {
+            border-color: #cfe2f5;
+            background: linear-gradient(145deg, #f4faff, #eaf4fe);
+        }
+
+        .info-box.info-box2 {
+            border-color: #d0f0e0;
+            background: linear-gradient(145deg, #f3fdf8, #e6faf1);
+        }
+
+        .info-box.safe-box {
+            border-color: #f5b8b8;
+            background: linear-gradient(145deg, #fff5f5, #ffeaea);
+        }
+
+        .info-box h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #0b2d45;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-box .icon-lg {
+            font-size: 1.7rem;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.6rem;
+        }
+
+        .info-box li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .info-box li::before {
+            content: "●";
+            color: #1e6f9f;
+            font-size: 0.7rem;
+            margin-top: 0.45rem;
+            flex-shrink: 0;
+        }
+
+        .info-box.info-box2 li::before {
+            color: #0f7a4d;
+        }
+
+        .info-box.safe-box li::before {
+            color: #b32d2d;
+        }
+
+        /* Data cycle tool grid */
+        .cycle-tools {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+            margin: 1.8rem 0;
+        }
+
+        .cycle-tool-card {
+            background: linear-gradient(145deg, #ffffff, #f5faff);
+            border-radius: 1.8rem;
+            padding: 1.5rem 1.2rem 1.4rem;
+            border: 2px solid #cfe2f5;
+            box-shadow: 0 12px 25px -15px #1a4a6e80;
+            transition: 0.2s;
+            text-align: center;
+            position: relative;
+        }
+
+        .cycle-tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 30px -15px #1a4a6e90;
+            border-color: #7fb3d8;
+        }
+
+        .cycle-tool-card .step-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e6f9f;
+            color: #fff;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            padding: 0.25rem 0.8rem;
+            border-radius: 20px;
+            border: 2px solid #fff;
+            white-space: nowrap;
+        }
+
+        .cycle-tool-card .ct-icon {
+            font-size: 2.4rem;
+            line-height: 1;
+            margin: 0.5rem 0 0.6rem;
+        }
+
+        .cycle-tool-card h4 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #0b2d45;
+            margin-bottom: 0.4rem;
+        }
+
+        .cycle-tool-card .tool-list {
+            font-size: 0.85rem;
+            color: #33566f;
+            line-height: 1.5;
+        }
+
+        /* Tool family grid */
+        .tool-family-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .tool-family-card {
+            background: linear-gradient(145deg, #fffdf5, #fef8e6);
+            border-radius: 1.6rem;
+            padding: 1.4rem 1.3rem;
+            border: 2px solid #e8d5a8;
+            transition: 0.2s;
+        }
+
+        .tool-family-card:hover {
+            transform: translateY(-4px);
+            border-color: #d9a441;
+        }
+
+        .tool-family-card .tf-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-family-card h4 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #7a5a10;
+            margin-bottom: 0.4rem;
+        }
+
+        .tool-family-card p {
+            font-size: 0.85rem;
+            color: #5c4408;
+            margin-bottom: 0;
+            line-height: 1.45;
+        }
+
+        /* Safe use cards */
+        .safe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .safe-card {
+            background: linear-gradient(145deg, #fff5f5, #ffeaea);
+            border-radius: 1.6rem;
+            padding: 1.4rem 1.3rem;
+            border: 2px solid #f5b8b8;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .safe-card:hover {
+            transform: translateY(-4px);
+            border-color: #b32d2d;
+        }
+
+        .safe-card .safe-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .safe-card h4 {
+            font-size: 1.02rem;
+            font-weight: 800;
+            color: #b32d2d;
+            margin-bottom: 0.4rem;
+        }
+
+        .safe-card p {
+            font-size: 0.85rem;
+            color: #6b1f1f;
+            margin-bottom: 0;
+            line-height: 1.45;
+        }
+
+        /* Website evaluation checklist */
+        .eval-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.4rem;
+            margin: 1.8rem 0;
+        }
+
+        .eval-card {
+            background: linear-gradient(145deg, #ffffff, #f5faff);
+            border-radius: 1.8rem;
+            padding: 1.5rem 1.4rem 1.4rem;
+            border: 2px solid #cfe2f5;
+            box-shadow: 0 12px 25px -15px #1a4a6e80;
+            text-align: center;
+            transition: 0.2s;
+            position: relative;
+        }
+
+        .eval-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 30px -15px #1a4a6e90;
+            border-color: #7fb3d8;
+        }
+
+        .eval-card .eval-num {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e6f9f;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #fff;
+        }
+
+        .eval-card .eval-icon {
+            font-size: 2.4rem;
+            margin: 0.4rem 0 0.6rem;
+        }
+
+        .eval-card h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #0b2d45;
+            margin-bottom: 0.5rem;
+        }
+
+        .eval-card .eval-question {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1e6f9f;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .eval-card p {
+            font-size: 0.85rem;
+            color: #33566f;
+            margin-bottom: 0;
+        }
+
+        /* Example source cards */
+        .source-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.4rem;
+            margin: 1.5rem 0;
+        }
+
+        .source-card {
+            border-radius: 1.6rem;
+            padding: 1.4rem 1.5rem;
+            border: 2px solid;
+        }
+
+        .source-card.trust {
+            border-color: #6cb99c;
+            background: linear-gradient(145deg, #f3fdf8, #e0f7ec);
+        }
+
+        .source-card.doubt {
+            border-color: #f5b8b8;
+            background: linear-gradient(145deg, #fff5f5, #ffeaea);
+        }
+
+        .source-card h4 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .source-card.trust h4 {
+            color: #0b5e3c;
+        }
+
+        .source-card.doubt h4 {
+            color: #b32d2d;
+        }
+
+        .source-card .source-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 1rem;
+            padding: 0.7rem 1rem;
+            font-size: 0.9rem;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+
+        .source-card.trust .source-item {
+            color: #134d33;
+            border-left: 4px solid #0b5e3c;
+        }
+
+        .source-card.doubt .source-item {
+            color: #6b1f1f;
+            border-left: 4px solid #b32d2d;
+        }
+
+        /* Key points */
+        .key-points {
+            background: linear-gradient(135deg, #0f2e44, #14425e);
+            color: #f0f9ff;
+            border-radius: 1.8rem;
+            padding: 1.6rem 2rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 15px 25px -12px #092c42;
+        }
+
+        .key-points h3 {
+            color: #bfe0ff;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .key-points ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .key-points li {
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            font-size: 1.02rem;
+        }
+
+        .key-points li::before {
+            content: "✔";
+            color: #5fd68a;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        /* Discussion */
+        .discussion-box {
+            background: #f4faff;
+            border-radius: 1.6rem;
+            padding: 1.5rem 1.8rem;
+            border-left: 8px solid #1e6f9f;
+            margin: 1.5rem 0;
+        }
+
+        .discussion-box h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #0a3f60;
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .discussion-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .discussion-box li {
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 1rem;
+            color: #1f3d54;
+        }
+
+        .discussion-box li::before {
+            content: "💬";
+            flex-shrink: 0;
+        }
+
+        /* Activity */
+        .activity-box {
+            background: linear-gradient(135deg, #fff8e6, #fef3d6);
+            border-radius: 1.6rem;
+            padding: 1.5rem 1.8rem;
+            border: 2px solid #f0d89c;
+            margin: 1.5rem 0;
+        }
+
+        .activity-box h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #7a5a10;
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .activity-box ol {
+            padding-left: 1.4rem;
+            color: #5c4408;
+        }
+
+        .activity-box ol li {
+            margin-bottom: 0.6rem;
+            font-size: 1rem;
+        }
+
+        /* Outcome banner */
+        .outcome-banner {
+            background: linear-gradient(135deg, #d9f0e4, #c2ebd6);
+            border-radius: 1.6rem;
+            padding: 1.3rem 1.8rem;
+            border: 2px solid #6cb99c;
+            margin: 1.8rem 0 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            font-weight: 700;
+            color: #0b5e3c;
+            font-size: 1.05rem;
+        }
+
+        .outcome-banner .outcome-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        /* ============================================================ */
+        /*  TEACHER INSTRUCTIONS SECTION (SIMPLE)                       */
+        /* ============================================================ */
+        .teacher-section {
+            margin-top: 3rem;
+            border-radius: 1.6rem;
+            overflow: hidden;
+            border: 3px dashed #c48a2c;
+            background: linear-gradient(145deg, #fffaf0, #fff4e0);
+            box-shadow: 0 12px 25px -15px #8a5a10;
+        }
+
+        .teacher-header {
+            background: linear-gradient(135deg, #8a5a10, #b07a1e);
+            color: #ffffff;
+            padding: 1rem 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+
+        .teacher-header .teacher-icon {
+            font-size: 1.5rem;
+        }
+
+        .teacher-header h2 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+        }
+
+        .teacher-body {
+            padding: 1.4rem 1.6rem 1.6rem;
+        }
+
+        .teacher-note {
+            background: #fffdf5;
+            border: 2px dashed #e0b75c;
+            border-radius: 1rem;
+            padding: 1rem 1.2rem;
+            font-size: 0.98rem;
+            color: #4a3a12;
+            min-height: 90px;
+            line-height: 1.7;
+        }
+
+        .teacher-note[contenteditable="true"]:focus {
+            outline: 3px solid #f0c674;
+            background: #fffef9;
+        }
+
+        .edit-hint {
+            font-size: 0.78rem;
+            color: #a17f2e;
+            margin-top: 0.6rem;
+            display: block;
+            font-style: italic;
+            text-align: right;
+        }
+
+        /* Presentation CTA */
+        .present-cta {
+            text-align: center;
+            background: linear-gradient(135deg, #0f2e44, #1a4f72);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-top: 2.5rem;
+            color: #f0f9ff;
+        }
+
+        .present-cta h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
+            color: #bfe0ff;
+        }
+
+        .present-cta p {
+            color: #d4ecff;
+            margin-bottom: 1.3rem;
+            font-size: 1rem;
+        }
+
+        .present-cta .start-btn {
+            font-size: 1.05rem;
+            padding: 0.85rem 2rem;
+        }
+
+        /* ============================================================ */
+        /*  PRESENTATION MODE                                          */
+        /* ============================================================ */
+        body.presenting {
+            background: #0a1e2e;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body.presenting .webpage {
+            display: none !important;
+        }
+
+        .presentation {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(145deg, #eef6ff 0%, #e0eefb 100%);
+            padding: 1.5rem;
+            overflow-y: auto;
+            z-index: 9999;
+        }
+
+        body.presenting .presentation {
+            display: block;
+        }
+
+        .presentation-inner {
+            max-width: 1150px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 20, 40, 0.4);
+            padding: 2rem 2.5rem 2.5rem;
+            border: 1px solid #d9e6f2;
+            position: relative;
+            min-height: calc(100vh - 3rem);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .exit-btn {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: #ffe6e6;
+            color: #b32d2d;
+            border: 1px solid #f5b8b8;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.5rem 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+            z-index: 10;
+        }
+
+        .exit-btn:hover {
+            background: #b32d2d;
+            color: #fff;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.4s ease;
+            flex: 1;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .slide-header .slide-num {
+            display: inline-block;
+            background: #0f2e44;
+            color: #bfe0ff;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .slide-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0b2d45;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .slide-header h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0b2d45;
+            line-height: 1.25;
+        }
+
+        .title-divider {
+            width: 90px;
+            height: 5px;
+            background: linear-gradient(90deg, #1e6f9f, #5fb3e0);
+            border-radius: 10px;
+            margin: 1rem auto 0;
+        }
+
+        .slide-body {
+            font-size: 1.08rem;
+            color: #1f3d54;
+        }
+
+        .slide-body p {
+            margin-bottom: 1rem;
+        }
+
+        .slide-body strong {
+            color: #0a3f60;
+        }
+
+        .hero-slide {
+            text-align: center;
+            padding: 1.5rem 1rem 2rem;
+        }
+
+        .hero-slide .big-icon {
+            font-size: 5rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-slide h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #0a2e4b;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-slide .hero-sub {
+            font-size: 1.35rem;
+            color: #2c5779;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-slide .hero-tagline {
+            display: inline-block;
+            background: #e2f0fa;
+            border-left: 6px solid #1e6f9f;
+            padding: 0.9rem 1.6rem;
+            border-radius: 0 1.2rem 1.2rem 0;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #06283d;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .slide-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #e2eefb;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #1e6f9f, #2d7fb8);
+            color: #ffffff;
+            border: none;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 0.7rem 1.6rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 6px 12px -6px #0a3a58;
+            border: 1px solid #4a94c4;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, #2d7fb8, #3a8bb9);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 16px -6px #0a3a58;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .nav-btn.secondary {
+            background: #eaf3fb;
+            color: #1e6f9f;
+            border: 1px solid #b8d4ec;
+            box-shadow: none;
+        }
+
+        .nav-btn.secondary:hover:not(:disabled) {
+            background: #1e6f9f;
+            color: #fff;
+        }
+
+        .slide-counter {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #1e6f9f;
+            background: #eaf3fb;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            border: 1px solid #b8d4ec;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2eefb;
+            border-radius: 10px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #1e6f9f, #5fb3e0);
+            border-radius: 10px;
+            transition: width 0.35s ease;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            .webpage {
+                padding: 1.4rem 1.2rem 2rem;
+            }
+            .web-hero h1 {
+                font-size: 2rem;
+            }
+            .web-section-header h2 {
+                font-size: 1.4rem;
+            }
+            .info-grid,
+            .info-grid.three,
+            .cycle-tools,
+            .eval-grid,
+            .source-grid {
+                grid-template-columns: 1fr;
+            }
+            .presentation-inner {
+                padding: 1.4rem 1.2rem 1.8rem;
+            }
+            .hero-slide h1 {
+                font-size: 2.2rem;
+            }
+            .slide-header h1,
+            .slide-header h2 {
+                font-size: 1.5rem;
+            }
+            .nav-btn {
+                padding: 0.6rem 1.1rem;
+                font-size: 0.85rem;
+            }
+            .exit-btn {
+                position: static;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!--  WEBPAGE (LESSON) VIEW                                       -->
+    <!-- ============================================================ -->
+    <div class="webpage" id="webpageView">
+
+        <!-- Top bar -->
+        <div class="top-bar">
+            <a href="index.html" class="back-home">← Back to Main Page</a>
+            <div class="top-actions">
+                <span class="topic-pill">TOPIC 9 · DATA LITERACY</span>
+                <button class="start-btn" onclick="startPresentation()">▶ Start Presentation</button>
+            </div>
+        </div>
+
+        <!-- Hero -->
+        <div class="web-hero">
+            <div class="big-icon">🌐💻🔐</div>
+            <h1>Using Internet Services<br>for Data Work</h1>
+            <p class="hero-sub">Grade 7 · Data Detectives Unit</p>
+            <div class="hero-tagline">
+                💬 “The internet is a powerful tool — use it wisely and safely.”
+            </div>
+            <div class="hero-badges">
+                <div class="hero-badge"><span>📋</span> Collect</div>
+                <div class="hero-badge"><span>⚙️</span> Process</div>
+                <div class="hero-badge"><span>🎨</span> Present</div>
+                <div class="hero-badge"><span>📤</span> Share</div>
+            </div>
+        </div>
+
+        <!-- SECTION 1 · ONLINE TOOLS FOR EACH STAGE -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Part 1</span>
+                <h2>Online Tools for Each Stage</h2>
+            </div>
+            <p style="font-size:1.15rem;">
+                The internet gives us tools for every step of the data cycle. Here is how they match up.
+            </p>
+
+            <div class="cycle-tools">
+                <div class="cycle-tool-card">
+                    <div class="step-badge">📥 COLLECT</div>
+                    <div class="ct-icon">📝</div>
+                    <h4>Gather Data</h4>
+                    <div class="tool-list">Google Forms<br>Microsoft Forms<br>SurveyMonkey</div>
+                </div>
+                <div class="cycle-tool-card">
+                    <div class="step-badge">⚙️ PROCESS</div>
+                    <div class="ct-icon">📊</div>
+                    <h4>Organise &amp; Calculate</h4>
+                    <div class="tool-list">Google Sheets<br>Excel Online</div>
+                </div>
+                <div class="cycle-tool-card">
+                    <div class="step-badge">🎨 PRESENT</div>
+                    <div class="ct-icon">🖼️</div>
+                    <h4>Show Findings</h4>
+                    <div class="tool-list">Google Slides<br>Canva<br>Infogram</div>
+                </div>
+                <div class="cycle-tool-card">
+                    <div class="step-badge">📤 SHARE</div>
+                    <div class="ct-icon">🔗</div>
+                    <h4>Send &amp; Publish</h4>
+                    <div class="tool-list">Google Drive<br>Email<br>Class website</div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h3>💡 Key Idea</h3>
+                <ul>
+                    <li>Each stage of the data cycle has a tool that fits best.</li>
+                    <li>Most tools are <strong>free and work in your browser</strong>.</li>
+                    <li>Tools can work together — a Form feeds into Sheets, which feeds into Slides.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 2 · TOOL FAMILIES -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Part 2</span>
+                <h2>Meet the Tools</h2>
+            </div>
+            <p style="font-size:1.1rem;">
+                Here are the most common online tools you can use for data work, grouped by what they do.
+            </p>
+
+            <div class="tool-family-grid">
+                <div class="tool-family-card">
+                    <div class="tf-icon">📋</div>
+                    <h4>Google Forms</h4>
+                    <p>Create online surveys. Answers automatically go into a spreadsheet.</p>
+                </div>
+                <div class="tool-family-card">
+                    <div class="tf-icon">📊</div>
+                    <h4>Google Sheets</h4>
+                    <p>Organise data, use formulas, and build charts — all in your browser.</p>
+                </div>
+                <div class="tool-family-card">
+                    <div class="tf-icon">📗</div>
+                    <h4>Excel Online</h4>
+                    <p>Microsoft's version — powerful spreadsheet tool, works online.</p>
+                </div>
+                <div class="tool-family-card">
+                    <div class="tf-icon">🖼️</div>
+                    <h4>Google Slides</h4>
+                    <p>Build presentations with charts, images, and text.</p>
+                </div>
+                <div class="tool-family-card">
+                    <div class="tf-icon">🎨</div>
+                    <h4>Canva</h4>
+                    <p>Design beautiful posters, reports, and infographics.</p>
+                </div>
+                <div class="tool-family-card">
+                    <div class="tf-icon">📈</div>
+                    <h4>Infogram</h4>
+                    <p>Create interactive charts and infographics.</p>
+                </div>
+                <div class="tool-family-card">
+                    <div class="tf-icon">📁</div>
+                    <h4>Google Drive</h4>
+                    <p>Store, organise, and share all your data files safely.</p>
+                </div>
+                <div class="tool-family-card">
+                    <div class="tf-icon">📝</div>
+                    <h4>Microsoft Forms</h4>
+                    <p>Another great survey tool — syncs with Excel.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 · SAFE AND RESPONSIBLE USE -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Part 3</span>
+                <h2>Safe and Responsible Use</h2>
+            </div>
+            <p style="font-size:1.1rem;">
+                The internet is powerful — but it also comes with responsibilities. When doing data work online, follow these four rules.
+            </p>
+
+            <div class="safe-grid">
+                <div class="safe-card">
+                    <div class="safe-icon">🔒</div>
+                    <h4>Protect Personal Data</h4>
+                    <p>Never share full names, addresses, or phone numbers of classmates.</p>
+                </div>
+                <div class="safe-card">
+                    <div class="safe-icon">🛡️</div>
+                    <h4>Respect Privacy</h4>
+                    <p>Keep survey answers anonymous. Don't reveal who said what.</p>
+                </div>
+                <div class="safe-card">
+                    <div class="safe-icon">🙏</div>
+                    <h4>Give Credit to Sources</h4>
+                    <p>Always say where you got secondary data — website name and link.</p>
+                </div>
+                <div class="safe-card">
+                    <div class="safe-icon">✅</div>
+                    <h4>Use Reliable Websites</h4>
+                    <p>Check if a source is trustworthy before using its data.</p>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h3>💡 Key Idea</h3>
+                <ul>
+                    <li>Being safe online means <strong>protecting others' data</strong> as carefully as your own.</li>
+                    <li>Good data work always involves <strong>honesty and respect</strong>.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 4 · EVALUATING ONLINE SOURCES -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Part 4</span>
+                <h2>Evaluating Online Sources</h2>
+            </div>
+            <p style="font-size:1.1rem;">
+                Not every website is trustworthy. Before using data you found online, ask these three questions:
+            </p>
+
+            <div class="eval-grid">
+                <div class="eval-card">
+                    <div class="eval-num">1</div>
+                    <div class="eval-icon">👤</div>
+                    <h4>Who made it?</h4>
+                    <div class="eval-question">"Who is the author?"</div>
+                    <p>Is it a government site, university, news agency, or a random blog?</p>
+                </div>
+                <div class="eval-card">
+                    <div class="eval-num">2</div>
+                    <div class="eval-icon">📅</div>
+                    <h4>When was it updated?</h4>
+                    <div class="eval-question">"Is it recent enough?"</div>
+                    <p>Data from 2005 may no longer be true. Look for a date.</p>
+                </div>
+                <div class="eval-card">
+                    <div class="eval-num">3</div>
+                    <div class="eval-icon">✅</div>
+                    <h4>Is it reliable?</h4>
+                    <div class="eval-question">"Can I trust it?"</div>
+                    <p>Does it cite sources? Is it well-written? Do other sites agree?</p>
+                </div>
+            </div>
+
+            <!-- Trustworthy vs. Questionable sources -->
+            <div class="source-grid">
+                <div class="source-card trust">
+                    <h4>✅ Usually Trustworthy</h4>
+                    <div class="source-item">Government websites (e.g., .gov, .edu)</div>
+                    <div class="source-item">Museums, libraries, and universities</div>
+                    <div class="source-item">Well-known news agencies (BBC, Reuters)</div>
+                    <div class="source-item">Official statistics offices</div>
+                </div>
+                <div class="source-card doubt">
+                    <h4>⚠️ Question These</h4>
+                    <div class="source-item">Personal blogs with no author info</div>
+                    <div class="source-item">Websites trying to sell something</div>
+                    <div class="source-item">Posts with no date or sources</div>
+                    <div class="source-item">Sites with shocking headlines</div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h3>💡 Key Idea</h3>
+                <ul>
+                    <li>Anyone can publish online — but not everything is <strong>true</strong>.</li>
+                    <li>Use the <strong>three questions</strong> (Who? When? Trustworthy?) to check every source.</li>
+                    <li>When in doubt, find a second source that says the same thing.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 5 · ACTIVITY -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Activity</span>
+                <h2>Let's Practise! 🎯</h2>
+            </div>
+
+            <div class="activity-box">
+                <h3>📝 Activity 1: Match the Tool to the Task</h3>
+                <ol>
+                    <li>You need to ask 30 classmates a question. → Which tool?</li>
+                    <li>You need to average 30 answers. → Which tool?</li>
+                    <li>You need to make a slide presentation of your findings. → Which tool?</li>
+                    <li>You need to share your final report with your teacher. → Which tool?</li>
+                </ol>
+            </div>
+
+            <div class="activity-box">
+                <h3>🔍 Activity 2: Evaluate a Website</h3>
+                <ol>
+                    <li>Find a website with a chart or survey result about a topic you like.</li>
+                    <li>Answer the three questions:<br><em>Who made it? When was it updated? Is it reliable?</em></li>
+                    <li>Would you use this data in your project? Why or why not?</li>
+                </ol>
+            </div>
+
+            <div class="activity-box">
+                <h3>🔐 Activity 3: Safe Data Habits</h3>
+                <ol>
+                    <li>You made a Google Form asking for names and birthdays. Is this safe?</li>
+                    <li>Rewrite the survey so it collects the same data safely.</li>
+                    <li>Which of the four safety rules does your rewrite follow?</li>
+                </ol>
+            </div>
+
+            <div class="discussion-box">
+                <h3>💬 Class Discussion</h3>
+                <ul>
+                    <li>Why is it important to protect other people's data online?</li>
+                    <li>What could happen if you used data from a fake news website?</li>
+                    <li>How can online tools make data work faster and easier?</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 6 · SUMMARY -->
+        <section class="web-section">
+            <div class="web-section-header">
+                <span class="step-tag">Summary</span>
+                <h2>What We Learned Today</h2>
+            </div>
+            <div class="key-points">
+                <h3>📌 Key Takeaways</h3>
+                <ul>
+                    <li>Online tools help with <strong>every stage</strong> of the data cycle.</li>
+                    <li><strong>Collect</strong> with Google Forms · <strong>Process</strong> with Sheets · <strong>Present</strong> with Slides/Canva · <strong>Share</strong> with Drive.</li>
+                    <li>Be safe online: <strong>protect data, respect privacy, give credit, use reliable sources</strong>.</li>
+                    <li>Evaluate every website: <strong>Who made it? When was it updated? Is it reliable?</strong></li>
+                </ul>
+            </div>
+            <div class="outcome-banner">
+                <span class="outcome-icon">🎓</span>
+                <span><strong>Student Outcome:</strong> You can now use internet services safely and effectively for each stage of a data task.</span>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TEACHER INSTRUCTIONS SECTION (SIMPLE)                        -->
+        <!-- ============================================================ -->
+        <section class="teacher-section" id="teacher-instructions">
+            <div class="teacher-header">
+                <span class="teacher-icon">👩‍🏫</span>
+                <h2>Teacher Instructions</h2>
+            </div>
+            <div class="teacher-body">
+                <div class="teacher-note" contenteditable="true">
+                    Take the ZipGrade quiz.<br>
+                    Submit the work on time.
+                </div>
+                <span class="edit-hint">✏️ Click to edit. Changes are temporary (refresh will reset).</span>
+            </div>
+        </section>
+
+        <!-- CTA to start presentation -->
+        <div class="present-cta">
+            <h3>🎬 Ready to present?</h3>
+            <p>Switch to full-screen presentation mode with slides and keyboard navigation.</p>
+            <button class="start-btn" onclick="startPresentation()">▶ Start Presentation</button>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!--  PRESENTATION MODE                                           -->
+    <!-- ============================================================ -->
+    <div class="presentation" id="presentationView">
+        <div class="presentation-inner">
+
+            <button class="exit-btn" onclick="exitPresentation()">✕ Exit Presentation</button>
+
+            <!-- SLIDE 1 · TITLE -->
+            <section class="slide active" id="slide-1">
+                <div class="hero-slide">
+                    <div class="big-icon">🌐💻🔐</div>
+                    <h1>Using Internet Services<br>for Data Work</h1>
+                    <p class="hero-sub">Grade 7 · Data Detectives Unit</p>
+                    <div class="hero-tagline">
+                        💬 “The internet is a powerful tool — use it wisely and safely.”
+                    </div>
+                    <div class="hero-badges">
+                        <div class="hero-badge"><span>📋</span> Collect</div>
+                        <div class="hero-badge"><span>⚙️</span> Process</div>
+                        <div class="hero-badge"><span>🎨</span> Present</div>
+                        <div class="hero-badge"><span>📤</span> Share</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 2 · ONLINE TOOLS FOR EACH STAGE -->
+            <section class="slide" id="slide-2">
+                <div class="slide-header">
+                    <span class="slide-num">PART 1</span>
+                    <h2>Online Tools for Each Stage</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="cycle-tools">
+                        <div class="cycle-tool-card">
+                            <div class="step-badge">📥 COLLECT</div>
+                            <div class="ct-icon">📝</div>
+                            <h4>Gather Data</h4>
+                            <div class="tool-list">Google Forms<br>Microsoft Forms<br>SurveyMonkey</div>
+                        </div>
+                        <div class="cycle-tool-card">
+                            <div class="step-badge">⚙️ PROCESS</div>
+                            <div class="ct-icon">📊</div>
+                            <h4>Organise</h4>
+                            <div class="tool-list">Google Sheets<br>Excel Online</div>
+                        </div>
+                        <div class="cycle-tool-card">
+                            <div class="step-badge">🎨 PRESENT</div>
+                            <div class="ct-icon">🖼️</div>
+                            <h4>Show</h4>
+                            <div class="tool-list">Google Slides<br>Canva<br>Infogram</div>
+                        </div>
+                        <div class="cycle-tool-card">
+                            <div class="step-badge">📤 SHARE</div>
+                            <div class="ct-icon">🔗</div>
+                            <h4>Send</h4>
+                            <div class="tool-list">Google Drive<br>Email<br>Class website</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 3 · MEET THE TOOLS -->
+            <section class="slide" id="slide-3">
+                <div class="slide-header">
+                    <span class="slide-num">PART 2</span>
+                    <h2>Meet the Tools</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="tool-family-grid">
+                        <div class="tool-family-card">
+                            <div class="tf-icon">📋</div>
+                            <h4>Google Forms</h4>
+                            <p>Create online surveys.</p>
+                        </div>
+                        <div class="tool-family-card">
+                            <div class="tf-icon">📊</div>
+                            <h4>Google Sheets</h4>
+                            <p>Organise and calculate data.</p>
+                        </div>
+                        <div class="tool-family-card">
+                            <div class="tf-icon">📗</div>
+                            <h4>Excel Online</h4>
+                            <p>Microsoft spreadsheet tool.</p>
+                        </div>
+                        <div class="tool-family-card">
+                            <div class="tf-icon">🖼️</div>
+                            <h4>Google Slides</h4>
+                            <p>Build presentations.</p>
+                        </div>
+                        <div class="tool-family-card">
+                            <div class="tf-icon">🎨</div>
+                            <h4>Canva</h4>
+                            <p>Design posters and reports.</p>
+                        </div>
+                        <div class="tool-family-card">
+                            <div class="tf-icon">📈</div>
+                            <h4>Infogram</h4>
+                            <p>Interactive charts.</p>
+                        </div>
+                        <div class="tool-family-card">
+                            <div class="tf-icon">📁</div>
+                            <h4>Google Drive</h4>
+                            <p>Store and share files.</p>
+                        </div>
+                        <div class="tool-family-card">
+                            <div class="tf-icon">📝</div>
+                            <h4>Microsoft Forms</h4>
+                            <p>Survey tool, syncs with Excel.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 4 · SAFE USE -->
+            <section class="slide" id="slide-4">
+                <div class="slide-header">
+                    <span class="slide-num">PART 3</span>
+                    <h2>Safe and Responsible Use</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="safe-grid">
+                        <div class="safe-card">
+                            <div class="safe-icon">🔒</div>
+                            <h4>Protect Personal Data</h4>
+                            <p>Never share names, addresses, or phone numbers.</p>
+                        </div>
+                        <div class="safe-card">
+                            <div class="safe-icon">🛡️</div>
+                            <h4>Respect Privacy</h4>
+                            <p>Keep survey answers anonymous.</p>
+                        </div>
+                        <div class="safe-card">
+                            <div class="safe-icon">🙏</div>
+                            <h4>Give Credit</h4>
+                            <p>Always say where data came from.</p>
+                        </div>
+                        <div class="safe-card">
+                            <div class="safe-icon">✅</div>
+                            <h4>Use Reliable Sites</h4>
+                            <p>Check sources are trustworthy.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 5 · EVALUATE ONLINE SOURCES -->
+            <section class="slide" id="slide-5">
+                <div class="slide-header">
+                    <span class="slide-num">PART 4</span>
+                    <h2>Evaluating Online Sources</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="eval-grid">
+                        <div class="eval-card">
+                            <div class="eval-num">1</div>
+                            <div class="eval-icon">👤</div>
+                            <h4>Who made it?</h4>
+                            <div class="eval-question">"Who is the author?"</div>
+                            <p>Government, university, or random blog?</p>
+                        </div>
+                        <div class="eval-card">
+                            <div class="eval-num">2</div>
+                            <div class="eval-icon">📅</div>
+                            <h4>When updated?</h4>
+                            <div class="eval-question">"Is it recent?"</div>
+                            <p>Old data may no longer be true.</p>
+                        </div>
+                        <div class="eval-card">
+                            <div class="eval-num">3</div>
+                            <div class="eval-icon">✅</div>
+                            <h4>Is it reliable?</h4>
+                            <div class="eval-question">"Can I trust it?"</div>
+                            <p>Does it cite sources? Do others agree?</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 6 · TRUSTWORTHY VS QUESTIONABLE -->
+            <section class="slide" id="slide-6">
+                <div class="slide-header">
+                    <span class="slide-num">PART 4</span>
+                    <h2>Which Sources Can You Trust?</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="source-grid">
+                        <div class="source-card trust">
+                            <h4>✅ Usually Trustworthy</h4>
+                            <div class="source-item">Government websites (.gov, .edu)</div>
+                            <div class="source-item">Museums, libraries, universities</div>
+                            <div class="source-item">Well-known news agencies</div>
+                            <div class="source-item">Official statistics offices</div>
+                        </div>
+                        <div class="source-card doubt">
+                            <h4>⚠️ Question These</h4>
+                            <div class="source-item">Personal blogs with no author</div>
+                            <div class="source-item">Sites trying to sell something</div>
+                            <div class="source-item">Posts with no date or sources</div>
+                            <div class="source-item">Sites with shocking headlines</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 7 · ACTIVITY -->
+            <section class="slide" id="slide-7">
+                <div class="slide-header">
+                    <span class="slide-num">ACTIVITY</span>
+                    <h2>Let's Practise! 🎯</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="activity-box">
+                        <h3>📝 Activity 1: Match Tool to Task</h3>
+                        <ol>
+                            <li>Ask 30 classmates a question → ?</li>
+                            <li>Average 30 answers → ?</li>
+                            <li>Present findings on slides → ?</li>
+                            <li>Share the report with your teacher → ?</li>
+                        </ol>
+                    </div>
+                    <div class="activity-box">
+                        <h3>🔍 Activity 2: Evaluate a Website</h3>
+                        <ol>
+                            <li>Find a website with a chart.</li>
+                            <li>Ask: Who? When? Reliable?</li>
+                            <li>Would you use it? Why?</li>
+                        </ol>
+                    </div>
+                    <div class="activity-box">
+                        <h3>🔐 Activity 3: Safe Data Habits</h3>
+                        <ol>
+                            <li>Is a form asking for names &amp; birthdays safe?</li>
+                            <li>Rewrite it safely.</li>
+                            <li>Which rule does it follow?</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 8 · SUMMARY -->
+            <section class="slide" id="slide-8">
+                <div class="slide-header">
+                    <span class="slide-num">SUMMARY</span>
+                    <h2>What We Learned Today</h2>
+                    <div class="title-divider"></div>
+                </div>
+                <div class="slide-body">
+                    <div class="key-points">
+                        <h3>📌 Key Takeaways</h3>
+                        <ul>
+                            <li>Online tools help with every stage of the data cycle.</li>
+                            <li><strong>Collect</strong> → Forms · <strong>Process</strong> → Sheets · <strong>Present</strong> → Slides/Canva · <strong>Share</strong> → Drive.</li>
+                            <li>Be safe: <strong>protect, respect, credit, verify</strong>.</li>
+                            <li>Evaluate sources: <strong>Who? When? Reliable?</strong></li>
+                        </ul>
+                    </div>
+                    <div class="outcome-banner">
+                        <span class="outcome-icon">🎓</span>
+                        <span><strong>Student Outcome:</strong> You can now use internet services safely and effectively for each stage of a data task.</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NAV -->
+            <div class="slide-nav">
+                <button class="nav-btn secondary" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+                <span class="slide-counter" id="counter">Slide 1 / 8</span>
+                <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 12.5%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== PRESENTATION MODE =====
+        const slides = document.querySelectorAll('.slide');
+        const counter = document.getElementById('counter');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressFill = document.getElementById('progressFill');
+        let current = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            counter.textContent = `Slide ${index + 1} / ${slides.length}`;
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === slides.length - 1;
+            progressFill.style.width = ((index + 1) / slides.length * 100) + '%';
+            document.querySelector('.presentation').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function changeSlide(direction) {
+            const newIndex = current + direction;
+            if (newIndex >= 0 && newIndex < slides.length) {
+                current = newIndex;
+                showSlide(current);
+            }
+        }
+
+        function startPresentation() {
+            document.body.classList.add('presenting');
+            current = 0;
+            showSlide(0);
+            const el = document.documentElement;
+            if (el.requestFullscreen) {
+                el.requestFullscreen().catch(() => {});
+            } else if (el.webkitRequestFullscreen) {
+                el.webkitRequestFullscreen();
+            }
+        }
+
+        function exitPresentation() {
+            document.body.classList.remove('presenting');
+            if (document.fullscreenElement) {
+                document.exitFullscreen().catch(() => {});
+            } else if (document.webkitFullscreenElement) {
+                document.webkitExitFullscreen();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (!document.body.classList.contains('presenting')) return;
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                changeSlide(1);
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                changeSlide(-1);
+            }
+            if (e.key === 'Escape') {
+                exitPresentation();
+            }
+        });
+
+        showSlide(0);
+    </script>
+</body>
+</html>
